@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mtsmda.workpiece.maven</groupId>
+    <artifactId>maven_db_connectors</artifactId>
+    <version>1.0.RELEASE.14092016</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <mysql.version>6.0.3</mysql.version>
+        <postgresql.version>9.1-901-1.jdbc4</postgresql.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--mysql-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <!--postgresql-->
+            <dependency>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+
+            <!--oracle-->
+            <dependency>
+                <groupId>ojdbc</groupId>
+                <artifactId>ojdbc</artifactId>
+                <version>14</version>
+            </dependency>
+
+            <!--mongodb-->
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>3.3.0</version>
+            </dependency>
+
+            <!--sqlite-->
+            <dependency>
+                <groupId>org.xerial</groupId>
+                <artifactId>sqlite-jdbc</artifactId>
+                <version>3.8.11.2</version>
+            </dependency>
+
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>
