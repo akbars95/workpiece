@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mtsmda.workpiece.maven</groupId>
+    <artifactId>maven_template</artifactId>
+    <version>1.0.RELEASE.14092016</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <org.apache.tiles.groupId>org.apache.tiles</org.apache.tiles.groupId>
+        <org.apache.velocity.groupId>org.apache.velocity</org.apache.velocity.groupId>
+        <org.thymeleaf.groupId>org.thymeleaf</org.thymeleaf.groupId>
+
+        <tiles.version>3.0.7</tiles.version>
+        <org.thymeleaf.version>3.0.1.RELEASE</org.thymeleaf.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--tiles-->
+            <dependency>
+                <groupId>${org.apache.tiles.groupId}</groupId>
+                <artifactId>tiles-core</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.tiles.groupId}</groupId>
+                <artifactId>tiles-jsp</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.tiles.groupId}</groupId>
+                <artifactId>tiles-api</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.tiles.groupId}</groupId>
+                <artifactId>tiles-servlet</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.tiles.groupId}</groupId>
+                <artifactId>tiles-template</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+
+            <!--velocity-->
+            <dependency>
+                <groupId>${org.apache.velocity.groupId}</groupId>
+                <artifactId>velocity</artifactId>
+                <version>1.7</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.velocity.groupId}</groupId>
+                <artifactId>velocity-tools</artifactId>
+                <version>2.0</version>
+            </dependency>
+
+            <!--freemarker-->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.23</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${org.thymeleaf.groupId}</groupId>
+                <artifactId>thymeleaf</artifactId>
+                <version>${org.thymeleaf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.thymeleaf.groupId}</groupId>
+                <artifactId>thymeleaf-spring4</artifactId>
+                <version>${org.thymeleaf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.thymeleaf.groupId}</groupId>
+                <artifactId>thymeleaf-spring3</artifactId>
+                <version>${org.thymeleaf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.thymeleaf.groupId}</groupId>
+                <artifactId>thymeleaf-testing</artifactId>
+                <version>${org.thymeleaf.version}</version>
+            </dependency>
+
+
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>
