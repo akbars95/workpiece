@@ -6,8 +6,65 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>maven_plugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.RELEASE.14092016</version>
     <packaging>pom</packaging>
+
+    <properties>
+        <project.java.version>1.8</project.java.version>
+        <org.apache.maven.plugins.groupId>org.apache.maven.plugins</org.apache.maven.plugins.groupId>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>${org.apache.maven.plugins.groupId}</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>${org.apache.maven.plugins.groupId}</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.5.1</version>
+                    <configuration>
+                        <compilerVersion>${project.java.version}</compilerVersion>
+                        <target>${project.java.version}</target>
+                        <source>${project.java.version}</source>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>${org.apache.maven.plugins.groupId}</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>${org.apache.maven.plugins.groupId}</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>${org.apache.maven.plugins.groupId}</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>${org.apache.maven.plugins.groupId}</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>${org.apache.maven.plugins.groupId}</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>${org.apache.maven.plugins.groupId}</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.19.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 
 </project>
