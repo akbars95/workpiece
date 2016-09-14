@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mtsmda.workpiece.maven</groupId>
+    <artifactId>maven_spring</artifactId>
+    <version>1.0.RELEASE.14092016</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <!--dependencies-->
+        <!--groupId-->
+        <org.springframework.groupId>org.springframework</org.springframework.groupId>
+
+        <!--artifactId-->
+        <spring.artifactId>spring</spring.artifactId>
+
+        <!--version-->
+        <spring.version>4.3.1.RELEASE</spring.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--spring-->
+            <dependency>
+                <groupId>${org.springframework.groupId}</groupId>
+                <artifactId>${spring.artifactId}-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.groupId}</groupId>
+                <artifactId>${spring.artifactId}-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.groupId}</groupId>
+                <artifactId>${spring.artifactId}-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.groupId}</groupId>
+                <artifactId>${spring.artifactId}-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.groupId}</groupId>
+                <artifactId>${spring.artifactId}-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.groupId}</groupId>
+                <artifactId>${spring.artifactId}-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.groupId}</groupId>
+                <artifactId>${spring.artifactId}-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.groupId}</groupId>
+                <artifactId>${spring.artifactId}-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.groupId}</groupId>
+                <artifactId>${spring.artifactId}-expression</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
