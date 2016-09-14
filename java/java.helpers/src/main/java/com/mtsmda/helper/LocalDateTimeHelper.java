@@ -60,4 +60,27 @@ public class LocalDateTimeHelper {
         return null;
     }
 
+    /*
+    0123456789
+    02:15:09
+    * */
+    public static LocalTime getLocalTime(String value) {
+        if (ObjectHelper.objectIsNotNull(value) && value.length() == 8) {
+            return LocalTime.of(Integer.valueOf(value.substring(0, 2)), Integer.valueOf(value.substring(3, 5))
+                    , Integer.valueOf(value.substring(6, 8)));
+        }
+        return null;
+    }
+
+    /*
+    0123456789012345678
+    02:15:09 15.10.2010
+    * */
+    public static LocalDateTime getLocalDateTime(String value) {
+        if (ObjectHelper.objectIsNotNull(value) && value.length() == 19) {
+            return LocalDateTime.of(getLocalDate(value.substring(9, 19)), getLocalTime(value.substring(0, 8)));
+        }
+        return null;
+    }
+
 }

@@ -74,4 +74,23 @@ public class LocalDateTimeHelperTest {
         System.out.println(getLocalDate("10.10.2014"));
     }
 
+    @Test
+    public void getLocalTimeTest(){
+        assertNull(getLocalTime(null));
+        assertNull(getLocalTime("adas"));
+        assertNull(getLocalTime("123456789"));
+        assertNull(getLocalTime("1234567"));
+        LocalTime localTime = getLocalTime("10:15:25");
+        assertNotNull(localTime);
+        assertEquals(LocalTime.of(10, 15, 25), localTime);
+    }
+
+    @Test
+    public void getLocalDateTimeTest(){
+        assertNull(getLocalDateTime("fwsd0fds0fds"));
+        LocalDateTime localDateTime = getLocalDateTime("10:09:35 17.02.2009");
+        assertNotNull(localDateTime);
+        assertEquals(localDateTime, LocalDateTime.of(2009, 2, 17, 10, 9, 35));
+    }
+
 }
