@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mtsmda.workpiece.maven</groupId>
+    <artifactId>maven_spring_security</artifactId>
+    <version>1.0.RELEASE.14092016</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <!--dependencies-->
+        <!--groupId-->
+        <org.springframework.security.groupId>org.springframework.security</org.springframework.security.groupId>
+
+        <!--artifactId-->
+        <spring.artifactId>spring</spring.artifactId>
+
+        <!--version-->
+        <spring.security.version>4.1.0.RELEASE</spring.security.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--spring security-->
+            <dependency>
+                <groupId>${org.springframework.security.groupId}</groupId>
+                <artifactId>${spring.artifactId}-security-core</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.security.groupId}</groupId>
+                <artifactId>${spring.artifactId}-security-web</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.security.groupId}</groupId>
+                <artifactId>${spring.artifactId}-security-config</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.security.groupId}</groupId>
+                <artifactId>${spring.artifactId}-security-taglibs</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>jsr250-api</artifactId>
+                <version>1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+</project>
