@@ -18,7 +18,7 @@ import javax.validation.groups.Default;
 /**
  * Created by MTSMDA on 30.08.2016.
  */
-@PasswordEquals(properties = {"accountPassword", "accountPassword2"}, groups = FourthOrder.class, message = "password and confirm password is not equals!")
+@PasswordEquals(className = RegistrationReqObj.class, properties = {"accountPassword", "accountPassword2"}, groups = FourthOrder.class, message = "password and confirm password is not equals!")
 public class RegistrationReqObj {
 
     @NotNull(groups = Default.class)

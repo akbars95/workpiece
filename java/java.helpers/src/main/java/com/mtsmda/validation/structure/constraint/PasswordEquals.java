@@ -24,6 +24,8 @@ public @interface PasswordEquals {
 
     Class<?>[] groups() default { };
 
+    Class<?> className() ;
+
     String [] properties() default {};
 
     Class<? extends Payload>[] payload() default { };
