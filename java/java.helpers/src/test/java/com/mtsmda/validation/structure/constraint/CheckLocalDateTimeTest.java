@@ -7,6 +7,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import javax.validation.groups.Default;
+
 import static org.junit.Assert.*;
 import static com.mtsmda.validation.structure.constraint.ForTesting.*;
 
@@ -36,4 +38,28 @@ public class CheckLocalDateTimeTest {
         registrationReqObj.setUserDateOfBirth(userDateOfBirth);
     }
 
+    @Test
+    public void checkLocalDateTimeTest1002True() {
+        CheckDate checkDate = new CheckDate();
+        checkDate.setTimeDate("23:12:02 02.12.2010");
+        StructureValidator<CheckDate>.StructureValidationResult validate = new StructureValidator<CheckDate>().validate(checkDate, Default.class);
+        assertNotNull(validate);
+        assertTrue(validate.getSuccessValidation());
+        assertNull(validate.getConstraintViolations());
+    }
+
+}
+
+class CheckDate{
+
+    @CheckLocalDateTime(beginTime = true, dateType = DateEnum.LOCAL_DATE_TIME)
+    private String timeDate;
+
+    public String getTimeDate() {
+        return timeDate;
+    }
+
+    public void setTimeDate(String timeDate) {
+        this.timeDate = timeDate;
+    }
 }

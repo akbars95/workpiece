@@ -24,6 +24,8 @@ public @interface CheckLocalDateTime {
 
     Class<?>[] groups() default { };
 
+    boolean beginTime();
+
     /*
     * should be: LOCAL_DATE, LOCAL_DATE_TIME, LOCAL_TIME
     * */

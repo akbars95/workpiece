@@ -56,7 +56,7 @@ public class RegistrationReqObj {
     private String userGender;
 
     @NotNull(groups = Default.class)
-    @CheckLocalDateTime(dateType = DateEnum.LOCAL_DATE, datePeriod = DateEnum.PAST, groups = FirstOrder.class)
+    @CheckLocalDateTime(beginTime = false, dateType = DateEnum.LOCAL_DATE, datePeriod = DateEnum.PAST, groups = FirstOrder.class)
     private String userDateOfBirth;
 
     @NotNull(groups = Default.class)
