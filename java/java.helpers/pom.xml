@@ -4,7 +4,7 @@
 
     <groupId>com.mtsmda.workpiece.java</groupId>
     <artifactId>java.helpers</artifactId>
-    <version>1.0.RELEASE.14092016</version>
+    <version>1.1.RELEASE.19092016</version>
     <packaging>jar</packaging>
 
     <parent>
