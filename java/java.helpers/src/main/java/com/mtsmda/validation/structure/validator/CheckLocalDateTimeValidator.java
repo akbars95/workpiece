@@ -71,7 +71,7 @@ LOCAL_DATE_TIME
                 }
                 break;
                 case LOCAL_DATE_TIME: {
-                    if(value.length() == 20){
+                    if(value.length() == 19){
                         localDateTime = LocalDateTime.of(Integer.valueOf(value.substring(6, 10)), Integer.valueOf(value.substring(3, 5)),
                                 Integer.valueOf(value.substring(0, 2)), Integer.valueOf(value.substring(11, 13)),
                                 Integer.valueOf(value.substring(14, 16)), Integer.valueOf(value.substring(17, 19)));

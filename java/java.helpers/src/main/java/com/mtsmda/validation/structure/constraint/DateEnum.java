@@ -11,6 +11,6 @@ public enum DateEnum {
 
     PAST,
     FUTURE,
-    NONE
+    NONE;
 
 }

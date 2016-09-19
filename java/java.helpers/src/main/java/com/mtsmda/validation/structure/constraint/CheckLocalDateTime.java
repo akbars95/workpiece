@@ -24,8 +24,14 @@ public @interface CheckLocalDateTime {
 
     Class<?>[] groups() default { };
 
+    /*
+    * should be: LOCAL_DATE, LOCAL_DATE_TIME, LOCAL_TIME
+    * */
     DateEnum dateType();
 
+    /*
+    * should be: PAST, FUTURE, NONE
+    * */
     DateEnum datePeriod() default DateEnum.NONE;
 
     Class<? extends Payload>[] payload() default { };
