@@ -63,17 +63,30 @@ public class StructureValidator<T> {
             this.constraintViolations = constraintViolations;
         }
 
-        public String getStringMessage(){
+        private String getStringMessageProcess(int type){
             StringBuilder stringBuilder = null;
             if(!this.getSuccessValidation() && ObjectHelper.objectIsNotNull(this.getConstraintViolations())){
                 stringBuilder = new StringBuilder("Error path:\r\n");
                 Iterator<ConstraintViolation<T>> iterator = this.getConstraintViolations().iterator();
                 while (iterator.hasNext()){
                     ConstraintViolation<T> next = iterator.next();
-                    stringBuilder.append(next.getPropertyPath()).append(" ").append(next.getMessage());
+                    stringBuilder.append(next.getPropertyPath());
+                    if(type == 0){
+                        stringBuilder.append(" - ").append(next.getMessage());
+                    }
+                    stringBuilder.append(";\r\n");
+
                 }
             }
             return stringBuilder.toString();
+        }
+
+        public String getStringMessageForLogger(){
+            return getStringMessageProcess(0);
+        }
+
+        public String getStringMessage(){
+            return getStringMessageProcess(-1);
         }
 
     }
