@@ -1,10 +1,12 @@
 package com.mtsmda.helper;
 
+import com.mtsmda.search.common.model.Manager;
 import com.mtsmda.search.common.model.Person;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Field;
 
+import static com.mtsmda.helper.ReflectionHelper.*;
 import static org.testng.Assert.*;
 
 /**
@@ -13,11 +15,12 @@ import static org.testng.Assert.*;
 public class ReflectionHelperTest {
 
     private Person person = new Person("firstNameIon", "lastNameIonescu");
+    private Manager manager = new Manager(person.getFirstName(), person.getLastName(), "H2Manager");
 
     @Test
     public void getFieldTest() {
         try {
-            Field firstName = ReflectionHelper.getField(this.person, "firstName");
+            Field firstName = getField(this.person, "firstName");
             assertNotNull(firstName);
         } catch (Exception e) {
             fail(e.getMessage());
@@ -25,21 +28,47 @@ public class ReflectionHelperTest {
     }
 
     @Test
-    public void getFieldsTest(){
-        Field[] fields = ReflectionHelper.getFields(this.person);
+    public void getFieldsTest() {
+        Field[] fields = getFields(this.person);
         assertNotNull(fields);
         assertEquals(fields.length, 2);
     }
 
     @Test
     public void isFieldInClassTest() {
-        assertTrue(ReflectionHelper.isFieldInClass(person, "firstName"), "this field is in class");
-        assertFalse(ReflectionHelper.isFieldInClass(person, "name"), "this field is not in class");
+        assertTrue(isFieldInClass(person, "firstName"), "this field is in class");
+        assertFalse(isFieldInClass(person, "name"), "this field is not in class");
     }
 
     @Test
     public void isFieldValueInClassTest() {
-        assertNotNull(ReflectionHelper.getFieldValueInClass(person, "firstName"));
+        assertNotNull(getFieldValueInClass(person, "firstName"));
+    }
+
+    @Test
+    public void getFieldInheritanceTest() {
+        try {
+            Field firstName = getField(this.manager, "firstName");
+            assertNotNull(firstName);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void getFieldInheritanceTrueTest() {
+        try {
+            Field firstName = getField(this.manager, "managerName");
+            assertNotNull(firstName);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void getFieldInheritanceFalseTest() throws NoSuchFieldException {
+        Field firstName = getField(this.manager, "patronymicName");
+        assertNull(firstName);
     }
 
 }
