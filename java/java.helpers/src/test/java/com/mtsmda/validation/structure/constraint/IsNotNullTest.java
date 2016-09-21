@@ -2,6 +2,7 @@ package com.mtsmda.validation.structure.constraint;
 
 import com.mtsmda.object.request.RegistrationReqObj;
 import com.mtsmda.validation.structure.StructureValidator;
+import com.mtsmda.validation.structure.sequence.FifthOrder;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -35,6 +36,17 @@ public class IsNotNullTest {
         assertFalse(validate.getConstraintViolations().isEmpty());
         assertFalse(validate.getConstraintViolations().size() == 0);
         assertTrue(validate.getConstraintViolations().size() == 1);
+        registrationReqObj.setUserMiddleName(userMiddleName);
+    }
+
+    @Test
+    public void isNotNullTest1002True() {
+        String userMiddleName = registrationReqObj.getUserMiddleName();
+        registrationReqObj.setUserMiddleName(null);
+        StructureValidator<RegistrationReqObj>.StructureValidationResult validate = registrationReqObjStructureValidator.validate(registrationReqObj, FifthOrder.class);
+        assertNotNull(validate);
+        assertTrue(validate.getSuccessValidation());
+        assertNull(validate.getConstraintViolations());
         registrationReqObj.setUserMiddleName(userMiddleName);
     }
 

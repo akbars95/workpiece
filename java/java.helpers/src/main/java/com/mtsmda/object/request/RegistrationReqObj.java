@@ -5,9 +5,7 @@ import com.mtsmda.validation.structure.constraint.CheckLocalDateTime;
 import com.mtsmda.validation.structure.constraint.DateEnum;
 import com.mtsmda.validation.structure.constraint.IsNotNull;
 import com.mtsmda.validation.structure.constraint.PasswordEquals;
-import com.mtsmda.validation.structure.sequence.FirstOrder;
-import com.mtsmda.validation.structure.sequence.FourthOrder;
-import com.mtsmda.validation.structure.sequence.SecondOrder;
+import com.mtsmda.validation.structure.sequence.*;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
@@ -48,6 +46,8 @@ public class RegistrationReqObj {
 
     @IsNotNull(min = 1, max = 75, groups = Default.class, message = "Size should be Min: 1 and Max: 75 symbols")
     @Pattern(regexp = Patterns.FIRST_LAST_MIDDLE_NAME, groups = FirstOrder.class)
+    @IsNotNull(min = 1, max = 75, groups = FifthOrder.class, message = "Size should be Min: 1 and Max: 75 symbols")
+    @IsNotNull(min = 1, max = 75, groups = SixthOrder.class, message = "Size should be Min: 1 and Max: 75 symbols")
     private String userMiddleName;
 
     @NotNull(groups = Default.class)

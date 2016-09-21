@@ -4,10 +4,7 @@ import com.mtsmda.validation.structure.validator.IsNotNullValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
@@ -18,6 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Constraint(validatedBy = IsNotNullValidator.class)
 @Documented
+@Repeatable(IsNotNull.List.class)
 public @interface IsNotNull {
 
     String message() default "{org.mtsmda.validator.isNotNull.message}";

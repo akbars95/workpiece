@@ -22,9 +22,9 @@ public class IsNotNullValidator implements ConstraintValidator<IsNotNull, String
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (ObjectHelper.objectIsNotNull(value) && value.length() >= min && value.length() <= max) {
+        if (ObjectHelper.objectIsNull(value)) {
             return true;
         }
-        return false;
+        return ObjectHelper.objectIsNotNull(value) && value.length() >= min && value.length() <= max;
     }
 }
