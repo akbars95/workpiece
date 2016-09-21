@@ -6,7 +6,7 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>1.2.4.RELEASE.21092016</version>
+    <version>1.3.RELEASE.21092016</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -17,6 +17,7 @@
         <log4j.groupId>log4j</log4j.groupId>
         <org.springframework.groupId>org.springframework</org.springframework.groupId>
         <com.fasterxml.jackson.core.groupId>com.fasterxml.jackson.core</com.fasterxml.jackson.core.groupId>
+        <com.fasterxml.jackson.dataformat.groupId>com.fasterxml.jackson.dataformat</com.fasterxml.jackson.dataformat.groupId>
         <org.springframework.security.groupId>org.springframework.security</org.springframework.security.groupId>
         <org.apache.tiles.groupId>org.apache.tiles</org.apache.tiles.groupId>
         <org.apache.velocity.groupId>org.apache.velocity</org.apache.velocity.groupId>
@@ -53,6 +54,7 @@
         <javax.validation.version>1.1.0.Final</javax.validation.version>
         <org.hibernate.validator.version>5.2.4.Final</org.hibernate.validator.version>
         <com.fasterxml.jackson.core.version>2.8.3</com.fasterxml.jackson.core.version>
+        <com.fasterxml.jackson.dataformat.version>2.8.3</com.fasterxml.jackson.dataformat.version>
 
 
         <!--plugins-->
@@ -73,6 +75,14 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--csv-->
+            <dependency>
+                <groupId>net.sf.supercsv</groupId>
+                <artifactId>super-csv</artifactId>
+                <version>2.4.0</version>
+            </dependency>
+
+
             <!--validation-->
             <dependency>
                 <groupId>javax.validation</groupId>
@@ -282,9 +292,14 @@
                 <version>${com.fasterxml.jackson.core.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <groupId>${com.fasterxml.jackson.dataformat.groupId}</groupId>
                 <artifactId>jackson-dataformat-xml</artifactId>
-                <version>${com.fasterxml.jackson.core.version}</version>
+                <version>${com.fasterxml.jackson.dataformat.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${com.fasterxml.jackson.dataformat.groupId}</groupId>
+                <artifactId>jackson-dataformat-csv</artifactId>
+                <version>${com.fasterxml.jackson.dataformat.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.codehaus.woodstox</groupId>
