@@ -6,7 +6,7 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>1.2.1.RELEASE.21092016</version>
+    <version>1.2.2.RELEASE.21092016</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -270,6 +270,12 @@
                 <artifactId>jackson-databind</artifactId>
                 <version>${com.fasterxml.jackson.core.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${com.fasterxml.jackson.core.groupId}</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${com.fasterxml.jackson.core.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.jayway.jsonpath</groupId>
                 <artifactId>json-path-assert</artifactId>
