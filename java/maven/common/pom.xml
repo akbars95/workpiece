@@ -6,7 +6,7 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>1.2.3.RELEASE.21092016</version>
+    <version>1.2.4.RELEASE.21092016</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -280,6 +280,16 @@
                 <groupId>${com.fasterxml.jackson.core.groupId}</groupId>
                 <artifactId>jackson-annotations</artifactId>
                 <version>${com.fasterxml.jackson.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${com.fasterxml.jackson.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.woodstox</groupId>
+                <artifactId>woodstox-core-asl</artifactId>
+                <version>4.4.1</version>
             </dependency>
 
             <dependency>
