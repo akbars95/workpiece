@@ -6,7 +6,7 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>1.2.RELEASE.19092016</version>
+    <version>1.2.1.RELEASE.21092016</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -52,6 +52,7 @@
         <org.mockito.version>2.0.2-beta</org.mockito.version>
         <javax.validation.version>1.1.0.Final</javax.validation.version>
         <org.hibernate.validator.version>5.2.4.Final</org.hibernate.validator.version>
+        <com.fasterxml.jackson.core.version>2.8.3</com.fasterxml.jackson.core.version>
 
 
         <!--plugins-->
@@ -262,12 +263,12 @@
             <dependency>
                 <groupId>${com.fasterxml.jackson.core.groupId}</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.4.1</version>
+                <version>${com.fasterxml.jackson.core.version}</version>
             </dependency>
             <dependency>
                 <groupId>${com.fasterxml.jackson.core.groupId}</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.4.1.1</version>
+                <version>${com.fasterxml.jackson.core.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.jayway.jsonpath</groupId>
