@@ -23,6 +23,10 @@ public class GenerateRandom {
 
     }
 
+    public GenerateRandom(Boolean all) {
+        this(all, all, all, all, all, all);
+    }
+
     public GenerateRandom(boolean englishSmallLetter, boolean englishBigLetter, boolean numbers, boolean russianSmallLetter, boolean russianBigLetter, boolean standardSpecialCharacters) {
         this.englishSmallLetter = englishSmallLetter;
         this.englishBigLetter = englishBigLetter;

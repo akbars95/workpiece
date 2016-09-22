@@ -108,12 +108,13 @@ public class GenerateRandomTest {
 
     @Test
     public void test1006CheckAllCharacters(){
-        generateRandom = new GenerateRandom(true, true, true, true, true, true);
+        generateRandom = new GenerateRandom(true);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
         assertEquals(characters.size(), 144);
 
         String generate = generateRandom.generate(255);
+        System.out.println(generate);
         assertNotNull(generate);
         for (int i = 0; i < generate.length();i++){
             assertTrue(Character.isLetterOrDigit(generate.charAt(i)) || Character.isDigit(generate.charAt(i)) || !Character.isLetterOrDigit(generate.charAt(i)));
