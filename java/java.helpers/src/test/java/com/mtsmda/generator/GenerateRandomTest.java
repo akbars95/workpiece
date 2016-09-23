@@ -138,4 +138,68 @@ public class GenerateRandomTest {
         assertTrue(generate.length() == 255);
     }
 
+    @Test
+    public void test1008CheckConstructorTypeONLY_ENGLISH_LETTER(){
+        generateRandom = new GenerateRandom(GenerateRandom.ONLY_ENGLISH_LETTER);
+        List<Character> characters = generateRandom.getCharacters();
+        assertNotNull(characters);
+        assertEquals(characters.size(), 52);
+
+        String generate = generateRandom.generate(25);
+        assertNotNull(generate);
+        for(int i = 0; i < generate.length(); i++){
+            assertTrue(Character.isLetter(generate.charAt(i)));
+            assertTrue(Character.isLowerCase(generate.charAt(i)) || Character.isUpperCase(generate.charAt(i)));
+        }
+        assertTrue(generate.length() == 25);
+    }
+
+    @Test
+    public void test1009CheckConstructorTypeONLY_RUSSIAN_LETTER(){
+        generateRandom = new GenerateRandom(GenerateRandom.ONLY_RUSSIAN_LETTER);
+        List<Character> characters = generateRandom.getCharacters();
+        assertNotNull(characters);
+        assertEquals(characters.size(), 66);
+
+        String generate = generateRandom.generate(25);
+        assertNotNull(generate);
+        for(int i = 0; i < generate.length(); i++){
+            assertTrue(Character.isLetter(generate.charAt(i)));
+            assertTrue(Character.isLowerCase(generate.charAt(i)) || Character.isUpperCase(generate.charAt(i)));
+        }
+        assertTrue(generate.length() == 25);
+    }
+
+    @Test
+    public void test1010CheckConstructorTypeENGLISH_LETTERS_AND_NUMBERS(){
+        generateRandom = new GenerateRandom(GenerateRandom.ENGLISH_LETTERS_AND_NUMBERS);
+        List<Character> characters = generateRandom.getCharacters();
+        assertNotNull(characters);
+        assertEquals(characters.size(), 62);
+
+        String generate = generateRandom.generate(25);
+        assertNotNull(generate);
+        for(int i = 0; i < generate.length(); i++){
+            assertTrue(Character.isLetterOrDigit(generate.charAt(i)));
+            assertTrue(Character.isLowerCase(generate.charAt(i)) || Character.isUpperCase(generate.charAt(i)) || Character.isDigit(generate.charAt(i)));
+        }
+        assertTrue(generate.length() == 25);
+    }
+
+    @Test
+    public void test1011CheckConstructorTypeRUSSIAN_LETTER_AND_NUMBERS(){
+        generateRandom = new GenerateRandom(GenerateRandom.RUSSIAN_LETTER_AND_NUMBERS);
+        List<Character> characters = generateRandom.getCharacters();
+        assertNotNull(characters);
+        assertEquals(characters.size(), 76);
+
+        String generate = generateRandom.generate(25);
+        assertNotNull(generate);
+        for(int i = 0; i < generate.length(); i++){
+            assertTrue(Character.isLetterOrDigit(generate.charAt(i)));
+            assertTrue(Character.isLowerCase(generate.charAt(i)) || Character.isUpperCase(generate.charAt(i)) || Character.isDigit(generate.charAt(i)));
+        }
+        assertTrue(generate.length() == 25);
+    }
+
 }

@@ -19,8 +19,38 @@ public class GenerateRandom {
 
     private List<Character> characters = new ArrayList<>();
 
+    public static final int ONLY_ENGLISH_LETTER = 0;
+    public static final int ENGLISH_LETTERS_AND_NUMBERS = 1;
+    public static final int ONLY_RUSSIAN_LETTER = 2;
+    public static final int RUSSIAN_LETTER_AND_NUMBERS = 3;
+
     public GenerateRandom() {
 
+    }
+
+    public GenerateRandom(Integer type) {
+        switch (type) {
+            case ENGLISH_LETTERS_AND_NUMBERS: {
+                this.numbers = true;
+            }
+            case ONLY_ENGLISH_LETTER: {
+                this.englishBigLetter = true;
+                this.englishSmallLetter = true;
+            }
+            break;
+            case RUSSIAN_LETTER_AND_NUMBERS: {
+                this.numbers = true;
+            }
+            case ONLY_RUSSIAN_LETTER: {
+                this.russianBigLetter = true;
+                this.russianSmallLetter = true;
+            }
+            break;
+        }
+        init();
+    }
+
+    private void typeResolver() {
     }
 
     public GenerateRandom(Boolean all) {
