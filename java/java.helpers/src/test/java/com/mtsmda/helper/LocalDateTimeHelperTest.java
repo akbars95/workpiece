@@ -93,4 +93,14 @@ public class LocalDateTimeHelperTest {
         assertEquals(localDateTime, LocalDateTime.of(2009, 2, 17, 10, 9, 35));
     }
 
+    @Test
+    public void convertCurrentLocalDateTimeToDateTest(){
+        assertNotNull(convertCurrentLocalDateTimeToDate());
+    }
+
+    @Test
+    public void convertLocalDateTimeToDateTest(){
+        assertNotNull(convertLocalDateTimeToDate(LocalDateTime.now()));
+    }
+
 }

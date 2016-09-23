@@ -1,9 +1,6 @@
 package com.mtsmda.helper;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -81,6 +78,14 @@ public class LocalDateTimeHelper {
             return LocalDateTime.of(getLocalDate(value.substring(9, 19)), getLocalTime(value.substring(0, 8)));
         }
         return null;
+    }
+
+    public static Date convertCurrentLocalDateTimeToDate() {
+        return Date.from(LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault()).atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static Date convertLocalDateTimeToDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
 }
