@@ -12,6 +12,7 @@ public class LocalDateTimeHelper {
     public static final String MYSQL_DATE_FORMAT = "yyyy-MM-dd";
     public static final String MYSQL_TIME_FORMAT = "HH:mm:ss";
     public static final String MYSQL_DATE_TIME_FORMAT = MYSQL_DATE_FORMAT + " " + MYSQL_TIME_FORMAT;
+    public static final String NORMAL_DATE_TIME_FORMAT = "dd.MM.yyyy" + " " + MYSQL_TIME_FORMAT;
 
     public static String localDate(LocalDate localDate, String format) {
         return localDate.format(DateTimeFormatter.ofPattern(format));

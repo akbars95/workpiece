@@ -35,6 +35,7 @@ public class LocalDateTimeHelperTest {
     public void localDateTimeTest(){
         assertEquals(localDateTime(localDateTime, "yyyyMMdd HHmmss"), "20101011 152030");
         assertNotEquals(localDateTime(localDateTime, "yyyyMMdd HH:mmss"), "20101011 152030");
+        assertEquals(localDateTime(localDateTime, LocalDateTimeHelper.NORMAL_DATE_TIME_FORMAT), "11.10.2010 15:20:30");
     }
 
     @Test
