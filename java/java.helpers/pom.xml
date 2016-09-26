@@ -10,7 +10,7 @@
     <parent>
         <groupId>com.mtsmda.workpiece.maven</groupId>
         <artifactId>common</artifactId>
-        <version>1.4.RELEASE.21092016</version>
+        <version>1.5.RELEASE.26092016</version>
     </parent>
 
     <name>java.helpers</name>
