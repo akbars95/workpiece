@@ -13,3 +13,9 @@ function getDate(date){
 function setNullInt(number) {
     return (number > -1) ? ((number < 10) ? "0" : "") + number : "Error";
 }
+
+function selectAll(id)
+{
+    document.getElementById(id).focus();
+    document.getElementById(id).select();
+}
