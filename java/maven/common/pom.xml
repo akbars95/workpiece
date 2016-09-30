@@ -6,7 +6,7 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>1.6.RELEASE.28092016</version>
+    <version>1.7.RELEASE.30092016</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -25,6 +25,7 @@
         <org.thymeleaf.groupId>org.thymeleaf</org.thymeleaf.groupId>
         <org.hibernate.groupId>org.hibernate</org.hibernate.groupId>
         <org.quartz-scheduler.groupId>org.quartz-scheduler</org.quartz-scheduler.groupId>
+        <javax.mail.groupId>javax.mail</javax.mail.groupId>
 
         <!--artifactId-->
         <spring.artifactId>spring</spring.artifactId>
@@ -456,6 +457,20 @@
                 <artifactId>activemq-all</artifactId>
                 <version>${activemq-all.version}</version>
             </dependency>
+
+            <!--mail-->
+            <dependency>
+                <groupId>${javax.mail.groupId}</groupId>
+                <artifactId>mail</artifactId>
+                <version>1.4.7</version>
+            </dependency>
+            <dependency>
+                <groupId>${javax.mail.groupId}</groupId>
+                <artifactId>javax.mail-api</artifactId>
+                <version>1.5.5</version>
+            </dependency>
+
+
 
         </dependencies>
     </dependencyManagement>
