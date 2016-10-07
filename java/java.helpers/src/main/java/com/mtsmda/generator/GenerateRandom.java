@@ -120,32 +120,30 @@ public class GenerateRandom {
         return generate(length, null, null);
     }
 
-    public String generate(int length, Integer min, Integer max) {
+    private String generate(int length, Integer min, Integer max) {
         checkLastElement();
 
         boolean isOnlyNumbers = false;
 
-        if(min != null && max != null && min.intValue() < 0 && max.intValue() > 9){
-            if(this.numbers && !this.englishBigLetter && !this.englishSmallLetter && !this.russianBigLetter
-                    && !this.russianSmallLetter && !this.standardSpecialCharacters){
-                if(this.setViaCustomChars){
-                    if(this.characters.isEmpty()){
+        if (min != null && max != null && min.intValue() < 0 && max.intValue() > 9) {
+            if (this.numbers && !this.englishBigLetter && !this.englishSmallLetter && !this.russianBigLetter
+                    && !this.russianSmallLetter && !this.standardSpecialCharacters) {
+                if (this.setViaCustomChars) {
+                    if (this.characters.isEmpty()) {
                         throw new RuntimeException("list of characters is null, list should not be null!");
-                    }else{
-                        for (Character current : this.characters){
-                            if(!current.isDigit(current)){
+                    } else {
+                        for (Character current : this.characters) {
+                            if (!current.isDigit(current)) {
                                 throw new RuntimeException("custom characters should be all numbers! " + current + "isn't digit!");
                             }
                         }
-                        isOnlyNumbers = true;
                     }
-                }else{
-
                 }
             }
             throw new RuntimeException("min value should be min number = 0 and max values should be 9!You are min=" + min
-            + " and max=" + max);
+                    + " and max=" + max);
         }
+        isOnlyNumbers = true;
 
         StringBuilder result = new StringBuilder();
         int currentInt = Integer.MIN_VALUE;
@@ -164,6 +162,15 @@ public class GenerateRandom {
             i++;
         }
         return result.toString();
+    }
+
+    public static <T extends Number> Double generateNumberInRange(T minValue, T maxValue) {
+        double random = -0.1;
+        do {
+            random = Math.random() * maxValue.doubleValue();
+        } while (minValue.doubleValue() > random || maxValue.doubleValue() < random);
+
+        return random;
     }
 
     private void checkLastElement() {

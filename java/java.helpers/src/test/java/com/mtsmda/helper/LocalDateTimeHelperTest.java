@@ -20,6 +20,16 @@ public class LocalDateTimeHelperTest {
     private LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
 
     @Test
+    public void convertLocalDateTimeToStringTest(){
+        String currentLDT = convertLocalDateTimeToString(null);
+        assertNotNull(currentLDT);
+        assertTrue(currentLDT.length() == 15);
+        currentLDT = convertLocalDateTimeToString(LocalDateTime.now().plusDays(100));
+        assertNotNull(currentLDT);
+        assertTrue(currentLDT.length() == 15);
+    }
+
+    @Test
     public void localDateTest(){
         assertEquals(localDate(this.localDate, "ddMMyyyy"), "11102010");
         assertNotEquals(localDate(this.localDate, "ddMMyyyy"), "111020.10");

@@ -217,4 +217,33 @@ public class GenerateRandomTest {
         assertTrue(generate.length() == 25);
     }
 
+    @Test
+    public void test1013generateNumberInRange(){
+        generateRandom = new GenerateRandom(GenerateRandom.ONLY_NUMBERS);
+
+        Double aDouble = generateRandom.generateNumberInRange(1, 5);
+        assertNotNull(aDouble);
+        assertTrue(aDouble >= 1 && aDouble <= 5, "check double values");
+
+        aDouble = generateRandom.generateNumberInRange(1.5F, 5.95F);
+        assertNotNull(aDouble);
+        assertTrue(aDouble >= 1.5 && aDouble <= 5.95, "check float values");
+
+        aDouble = generateRandom.generateNumberInRange(new Byte((byte) 9), new Byte("15"));
+        assertNotNull(aDouble);
+        assertTrue(aDouble >= 9 && aDouble <= 15, "check byte values");
+
+        aDouble = generateRandom.generateNumberInRange(new Short("12"), new Short("14"));
+        assertNotNull(aDouble);
+        assertTrue(aDouble >= 12 && aDouble <= 14, "check short values");
+
+        aDouble = generateRandom.generateNumberInRange(100, 950);
+        assertNotNull(aDouble);
+        assertTrue(aDouble >= 100 && aDouble <= 950, "check int values");
+
+        aDouble = generateRandom.generateNumberInRange(1_000_000L, 1_000_000 + 10L);
+        assertNotNull(aDouble);
+        assertTrue(aDouble >= 1_000_000 && aDouble <= (1_000_000 + 10), "check long values");
+    }
+
 }
