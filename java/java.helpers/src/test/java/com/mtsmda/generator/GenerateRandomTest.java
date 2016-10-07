@@ -15,7 +15,7 @@ public class GenerateRandomTest {
     private GenerateRandom generateRandom;
 
     @Test
-    public void test1000CheckLowerEnglishLetters(){
+    public void test1000CheckLowerEnglishLetters() {
         generateRandom = new GenerateRandom(true, false, false, false, false, false);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
@@ -30,7 +30,7 @@ public class GenerateRandomTest {
     }
 
     @Test
-    public void test1001CheckUpperEnglishLetters(){
+    public void test1001CheckUpperEnglishLetters() {
         generateRandom = new GenerateRandom(false, true, false, false, false, false);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
@@ -45,7 +45,7 @@ public class GenerateRandomTest {
     }
 
     @Test
-    public void test1002CheckNumbers(){
+    public void test1002CheckNumbers() {
         generateRandom = new GenerateRandom(false, false, true, false, false, false);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
@@ -55,14 +55,14 @@ public class GenerateRandomTest {
 
         String generate = generateRandom.generate(10);
         assertNotNull(generate);
-        for(int i = 0; i < generate.length(); i++){
+        for (int i = 0; i < generate.length(); i++) {
             assertTrue(Character.isDigit(generate.charAt(i)));
         }
         assertTrue(generate.length() == 10);
     }
 
     @Test
-    public void test1003CheckLowerRussianLetters(){
+    public void test1003CheckLowerRussianLetters() {
         generateRandom = new GenerateRandom(false, false, false, true, false, false);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
@@ -77,7 +77,7 @@ public class GenerateRandomTest {
     }
 
     @Test
-    public void test1004CheckUpperRussianLetters(){
+    public void test1004CheckUpperRussianLetters() {
         generateRandom = new GenerateRandom(false, false, false, false, true, false);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
@@ -92,7 +92,7 @@ public class GenerateRandomTest {
     }
 
     @Test
-    public void test1005CheckSpecialCharacters(){
+    public void test1005CheckSpecialCharacters() {
         generateRandom = new GenerateRandom(false, false, false, false, false, true);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
@@ -100,14 +100,14 @@ public class GenerateRandomTest {
 
         String generate = generateRandom.generate(10);
         assertNotNull(generate);
-        for (int i = 0; i < generate.length();i++){
+        for (int i = 0; i < generate.length(); i++) {
             assertFalse(Character.isLetterOrDigit(generate.charAt(i)));
         }
         assertTrue(generate.length() == 10);
     }
 
     @Test
-    public void test1006CheckAllCharacters(){
+    public void test1006CheckAllCharacters() {
         generateRandom = new GenerateRandom(true);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
@@ -116,14 +116,14 @@ public class GenerateRandomTest {
         String generate = generateRandom.generate(255);
         System.out.println(generate);
         assertNotNull(generate);
-        for (int i = 0; i < generate.length();i++){
+        for (int i = 0; i < generate.length(); i++) {
             assertTrue(Character.isLetterOrDigit(generate.charAt(i)) || Character.isDigit(generate.charAt(i)) || !Character.isLetterOrDigit(generate.charAt(i)));
         }
         assertTrue(generate.length() == 255);
     }
 
     @Test
-    public void test1007CheckCustomCharacters(){
+    public void test1007CheckCustomCharacters() {
         List<Character> listWithData = ListHelper.getListWithData('c', '#', '5', '2', '-');
         generateRandom = new GenerateRandom(listWithData);
         List<Character> characters = generateRandom.getCharacters();
@@ -132,14 +132,14 @@ public class GenerateRandomTest {
 
         String generate = generateRandom.generate(255);
         assertNotNull(generate);
-        for (int i = 0; i < generate.length();i++){
+        for (int i = 0; i < generate.length(); i++) {
             assertTrue(listWithData.contains(generate.charAt(i)));
         }
         assertTrue(generate.length() == 255);
     }
 
     @Test
-    public void test1008CheckConstructorTypeONLY_ENGLISH_LETTER(){
+    public void test1008CheckConstructorTypeONLY_ENGLISH_LETTER() {
         generateRandom = new GenerateRandom(GenerateRandom.ONLY_ENGLISH_LETTER);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
@@ -147,7 +147,7 @@ public class GenerateRandomTest {
 
         String generate = generateRandom.generate(25);
         assertNotNull(generate);
-        for(int i = 0; i < generate.length(); i++){
+        for (int i = 0; i < generate.length(); i++) {
             assertTrue(Character.isLetter(generate.charAt(i)));
             assertTrue(Character.isLowerCase(generate.charAt(i)) || Character.isUpperCase(generate.charAt(i)));
         }
@@ -155,7 +155,7 @@ public class GenerateRandomTest {
     }
 
     @Test
-    public void test1009CheckConstructorTypeONLY_RUSSIAN_LETTER(){
+    public void test1009CheckConstructorTypeONLY_RUSSIAN_LETTER() {
         generateRandom = new GenerateRandom(GenerateRandom.ONLY_RUSSIAN_LETTER);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
@@ -163,7 +163,7 @@ public class GenerateRandomTest {
 
         String generate = generateRandom.generate(25);
         assertNotNull(generate);
-        for(int i = 0; i < generate.length(); i++){
+        for (int i = 0; i < generate.length(); i++) {
             assertTrue(Character.isLetter(generate.charAt(i)));
             assertTrue(Character.isLowerCase(generate.charAt(i)) || Character.isUpperCase(generate.charAt(i)));
         }
@@ -171,7 +171,7 @@ public class GenerateRandomTest {
     }
 
     @Test
-    public void test1010CheckConstructorTypeENGLISH_LETTERS_AND_NUMBERS(){
+    public void test1010CheckConstructorTypeENGLISH_LETTERS_AND_NUMBERS() {
         generateRandom = new GenerateRandom(GenerateRandom.ENGLISH_LETTERS_AND_NUMBERS);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
@@ -179,7 +179,7 @@ public class GenerateRandomTest {
 
         String generate = generateRandom.generate(25);
         assertNotNull(generate);
-        for(int i = 0; i < generate.length(); i++){
+        for (int i = 0; i < generate.length(); i++) {
             assertTrue(Character.isLetterOrDigit(generate.charAt(i)));
             assertTrue(Character.isLowerCase(generate.charAt(i)) || Character.isUpperCase(generate.charAt(i)) || Character.isDigit(generate.charAt(i)));
         }
@@ -187,7 +187,7 @@ public class GenerateRandomTest {
     }
 
     @Test
-    public void test1011CheckConstructorTypeRUSSIAN_LETTER_AND_NUMBERS(){
+    public void test1011CheckConstructorTypeRUSSIAN_LETTER_AND_NUMBERS() {
         generateRandom = new GenerateRandom(GenerateRandom.RUSSIAN_LETTER_AND_NUMBERS);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
@@ -195,9 +195,24 @@ public class GenerateRandomTest {
 
         String generate = generateRandom.generate(25);
         assertNotNull(generate);
-        for(int i = 0; i < generate.length(); i++){
+        for (int i = 0; i < generate.length(); i++) {
             assertTrue(Character.isLetterOrDigit(generate.charAt(i)));
             assertTrue(Character.isLowerCase(generate.charAt(i)) || Character.isUpperCase(generate.charAt(i)) || Character.isDigit(generate.charAt(i)));
+        }
+        assertTrue(generate.length() == 25);
+    }
+
+    @Test
+    public void test1012CheckConstructorTypeONLY_NUMBERS() {
+        generateRandom = new GenerateRandom(GenerateRandom.ONLY_NUMBERS);
+        List<Character> characters = generateRandom.getCharacters();
+        assertNotNull(characters);
+        assertEquals(characters.size(), 10);
+
+        String generate = generateRandom.generate(25);
+        assertNotNull(generate);
+        for (int i = 0; i < generate.length(); i++) {
+            assertTrue(Character.isDigit(generate.charAt(i)));
         }
         assertTrue(generate.length() == 25);
     }

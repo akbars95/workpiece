@@ -6,7 +6,7 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>1.7.RELEASE.30092016</version>
+    <version>1.7.1.RELEASE.06102016</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -53,7 +53,7 @@
         <javax.servlet.version>3.1.0</javax.servlet.version>
         <jstl.version>1.2</jstl.version>
         <junit.version>4.12</junit.version>
-        <org.testng.version>6.9.10</org.testng.version>
+        <org.testng.version>6.9.13.6</org.testng.version>
         <org.mockito.version>2.0.2-beta</org.mockito.version>
         <javax.validation.version>1.1.0.Final</javax.validation.version>
         <org.hibernate.validator.version>5.2.4.Final</org.hibernate.validator.version>

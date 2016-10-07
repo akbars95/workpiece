@@ -4,13 +4,13 @@
 
     <groupId>com.mtsmda.workpiece.java</groupId>
     <artifactId>java.helpers</artifactId>
-    <version>1.4.4.RELEASE.25092016</version>
+    <version>1.4.5.RELEASE.06102016</version>
     <packaging>jar</packaging>
 
     <parent>
         <groupId>com.mtsmda.workpiece.maven</groupId>
         <artifactId>common</artifactId>
-        <version>1.7.RELEASE.30092016</version>
+        <version>1.7.1.RELEASE.06102016</version>
     </parent>
 
     <name>java.helpers</name>
@@ -25,12 +25,10 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>${org.testng.version}</version>
         </dependency>
 
         <!--commons-->

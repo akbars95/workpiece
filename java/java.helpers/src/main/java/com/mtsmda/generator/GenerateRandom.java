@@ -17,15 +17,18 @@ public class GenerateRandom {
     private boolean russianBigLetter;
     private boolean standardSpecialCharacters;
 
+    private boolean setViaCustomChars;
+
     private List<Character> characters = new ArrayList<>();
 
     public static final int ONLY_ENGLISH_LETTER = 0;
     public static final int ENGLISH_LETTERS_AND_NUMBERS = 1;
     public static final int ONLY_RUSSIAN_LETTER = 2;
     public static final int RUSSIAN_LETTER_AND_NUMBERS = 3;
+    public static final int ONLY_NUMBERS = 4;
 
     public GenerateRandom() {
-
+        this.setViaCustomChars = true;
     }
 
     public GenerateRandom(Integer type) {
@@ -46,11 +49,12 @@ public class GenerateRandom {
                 this.russianSmallLetter = true;
             }
             break;
+            case ONLY_NUMBERS: {
+                this.numbers = true;
+            }
         }
+        this.setViaCustomChars = true;
         init();
-    }
-
-    private void typeResolver() {
     }
 
     public GenerateRandom(Boolean all) {
@@ -64,11 +68,13 @@ public class GenerateRandom {
         this.russianSmallLetter = russianSmallLetter;
         this.russianBigLetter = russianBigLetter;
         this.standardSpecialCharacters = standardSpecialCharacters;
+        this.setViaCustomChars = true;
         init();
     }
 
     public GenerateRandom(List<Character> characters) {
         this.characters = characters;
+        this.setViaCustomChars = true;
     }
 
     private void init() {
@@ -111,10 +117,46 @@ public class GenerateRandom {
     }
 
     public String generate(int length) {
+        return generate(length, null, null);
+    }
+
+    public String generate(int length, Integer min, Integer max) {
         checkLastElement();
+
+        boolean isOnlyNumbers = false;
+
+        if(min != null && max != null && min.intValue() < 0 && max.intValue() > 9){
+            if(this.numbers && !this.englishBigLetter && !this.englishSmallLetter && !this.russianBigLetter
+                    && !this.russianSmallLetter && !this.standardSpecialCharacters){
+                if(this.setViaCustomChars){
+                    if(this.characters.isEmpty()){
+                        throw new RuntimeException("list of characters is null, list should not be null!");
+                    }else{
+                        for (Character current : this.characters){
+                            if(!current.isDigit(current)){
+                                throw new RuntimeException("custom characters should be all numbers! " + current + "isn't digit!");
+                            }
+                        }
+                        isOnlyNumbers = true;
+                    }
+                }else{
+
+                }
+            }
+            throw new RuntimeException("min value should be min number = 0 and max values should be 9!You are min=" + min
+            + " and max=" + max);
+        }
+
         StringBuilder result = new StringBuilder();
+        int currentInt = Integer.MIN_VALUE;
         for (int i = 0; i < length; ) {
-            Character character = this.characters.get((new Double(Math.random() * this.characters.size() - 1).intValue()));
+            do {
+                currentInt = new Double(Math.random() * this.characters.size() - 1).intValue();
+            } while (isOnlyNumbers && ((min != null && max != null && currentInt <= min && currentInt >= max) ||
+                    (min != null && max == null && currentInt <= min) ||
+                    (min == null && max != null && currentInt >= max)));
+
+            Character character = this.characters.get(currentInt);
             if (character.equals(" ")) {
                 continue;
             }
