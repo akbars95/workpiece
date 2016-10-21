@@ -246,4 +246,72 @@ public class GenerateRandomTest {
         assertTrue(aDouble >= 1_000_000 && aDouble <= (1_000_000 + 10), "check long values");
     }
 
+    @Test
+    public void testGenerateRandomNumber(){
+        List<Range> ranges = ListHelper.getListWithData(new Range(0, 9), new Range(9, 100), new Range(1_000, 2_000));
+        ranges.forEach(range -> {
+            for(int i = 0; i < 25; i++){
+                long number = GenerateRandom.generateRandomNumberInRange(range.getMin(), range.getMax());
+                System.out.println("current - " + number + ", min - " + range.getMin() + ",max - " + range.getMax());
+                assertTrue(number >= range.getMin());
+                assertTrue(number <= range.getMax());
+            }
+            System.out.println("-------------");
+        });
+    }
+
+    @Test
+    public void testGenerateRandomNumberInRangeWithCount(){
+        List<Range> ranges = ListHelper.getListWithData(new Range(0, 9, 25), new Range(9, 100, 75), new Range(1_000, 2_000, 90));
+        ranges.forEach(range -> {
+            for(int i = 0; i < 25; i++){
+                String number = GenerateRandom.generateRandomNumberInRangeWithCount(range.getMin(), range.getMax(), range.getCount());
+                System.out.println("current - " + number + ", min - " + range.getMin() + ",max - " + range.getMax());
+                assertTrue(number.length() == range.getCount());
+            }
+            System.out.println("-------------");
+        });
+    }
+
+    private class Range{
+        private long min;
+        private long max;
+        private int count;
+
+        public Range(long min, long max) {
+            this.min = min;
+            this.max = max;
+        }
+
+        public Range(long min, long max, int count) {
+            this.min = min;
+            this.max = max;
+            this.count = count;
+        }
+
+        public long getMin() {
+            return min;
+        }
+
+        public void setMin(long min) {
+            this.min = min;
+        }
+
+        public long getMax() {
+            return max;
+        }
+
+        public void setMax(long max) {
+            this.max = max;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+    }
+
 }

@@ -188,4 +188,23 @@ public class GenerateRandom {
     public void setCharacters(List<Character> characters) {
         this.characters = characters;
     }
+
+    public static long generateRandomNumberInRange(long min, long max) {
+        if(min > max){
+            throw new RuntimeException("min should be less than max!");
+        }
+        long result = -1;
+        do {
+            result = Math.round(Math.random() * max);
+        } while (result < min || result > max);
+        return result;
+    }
+
+    public static String generateRandomNumberInRangeWithCount(long min, long max, int count){
+        StringBuilder result = new StringBuilder();
+        for(int i = 0; i < count; i++){
+            result.append(generateRandomNumberInRange(min, max));
+        }
+        return result.toString();
+    }
 }
