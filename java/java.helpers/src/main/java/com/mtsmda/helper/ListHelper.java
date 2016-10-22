@@ -1,5 +1,7 @@
 package com.mtsmda.helper;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,29 @@ public class ListHelper {
             }
         }
         return tList;
+    }
+
+    public static <T> String getListAsStringWithDelimiter(List<T> tList, String delimiter) {
+        StringBuilder stringBuilder = new StringBuilder();
+        tList.forEach(current -> {
+            if (StringUtils.isNotBlank(delimiter)) {
+                stringBuilder.append(current).append(delimiter);
+            } else {
+                stringBuilder.append(current).append(",");
+            }
+        });
+
+        int length = stringBuilder.length();
+        if (StringUtils.isNotBlank(delimiter)) {
+            if (stringBuilder.toString().endsWith(delimiter)) {
+                stringBuilder.delete(length - delimiter.length(), length);
+            }
+        } else {
+            if (stringBuilder.charAt(length - 1) == ',') {
+                stringBuilder.delete(length - 1, length);
+            }
+        }
+        return stringBuilder.toString();
     }
 
 }
