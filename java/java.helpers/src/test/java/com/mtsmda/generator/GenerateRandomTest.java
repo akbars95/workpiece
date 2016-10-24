@@ -262,15 +262,35 @@ public class GenerateRandomTest {
 
     @Test
     public void testGenerateRandomNumberInRangeWithCount(){
-        List<Range> ranges = ListHelper.getListWithData(new Range(0, 9, 25), new Range(9, 100, 75), new Range(1_000, 2_000, 90));
+        List<Range> ranges = ListHelper.getListWithData(new Range(0, 9, 25), new Range(0, 9, 75), new Range(0, 9, 90));
         ranges.forEach(range -> {
             for(int i = 0; i < 25; i++){
                 String number = GenerateRandom.generateRandomNumberInRangeWithCount(range.getMin(), range.getMax(), range.getCount());
-                System.out.println("current - " + number + ", min - " + range.getMin() + ",max - " + range.getMax());
+                System.out.println("current - " + number + ", min - " + range.getMin() + ",max - " + range.getMax() + ", count - " + range.getCount());
                 assertTrue(number.length() == range.getCount());
             }
             System.out.println("-------------");
         });
+    }
+
+    @Test
+    public void testgenerateRandomNumberInRangeWithCountException(){
+        testgenerateRandomNumberInRangeWithCountExceptionProcess(-1, 5, 5);
+        testgenerateRandomNumberInRangeWithCountExceptionProcess(10, 5, 5);
+
+//        testgenerateRandomNumberInRangeWithCountExceptionProcess(0, 9, 5);
+    }
+
+    private void testgenerateRandomNumberInRangeWithCountExceptionProcess(long min, long max, int count){
+        String generateRandomNumberInRangeWithCount = null;
+        try{
+            generateRandomNumberInRangeWithCount = GenerateRandom.generateRandomNumberInRangeWithCount(min, max, count);
+        }
+        catch (RuntimeException e){
+            assertEquals(e.getMessage(), "min should be 0 and max should be 9!");
+            return;
+        }
+        fail("Should be only with exception!");
     }
 
     private class Range{

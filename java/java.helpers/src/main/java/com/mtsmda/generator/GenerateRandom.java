@@ -189,8 +189,12 @@ public class GenerateRandom {
         this.characters = characters;
     }
 
+    public static int generateRandomNumberInRange(int min, int max) {
+        return generateRandomNumberInRange(min, max);
+    }
+
     public static long generateRandomNumberInRange(long min, long max) {
-        if(min > max){
+        if (min > max) {
             throw new RuntimeException("min should be less than max!");
         }
         long result = -1;
@@ -200,9 +204,18 @@ public class GenerateRandom {
         return result;
     }
 
-    public static String generateRandomNumberInRangeWithCount(long min, long max, int count){
+    public static String generateRandomNumberInRangeWithCount(long min, long max, int count) {
         StringBuilder result = new StringBuilder();
-        for(int i = 0; i < count; i++){
+        if (min < 0 || max > 9) {
+            throw new RuntimeException("min should be 0 and max should be 9!");
+        }
+        if(min > max){
+            throw new RuntimeException("min cannot be more than max!");
+        }
+        if(count < 1){
+            System.out.println("Count should be more than 1");
+        }
+        for (int i = 0; i < count; i++) {
             result.append(generateRandomNumberInRange(min, max));
         }
         return result.toString();
