@@ -22,7 +22,7 @@ public class PasswordEncoder {
 
         switch (encoderType) {
             case REVERSE: {
-                reverseEncode(encodedPassword);
+                reverseEncodeDecode(encodedPassword);
             }
             break;
             case TO_LOWER_CASE: {
@@ -31,6 +31,7 @@ public class PasswordEncoder {
             break;
         }
 
+        randomLetters(encoderType, encodedPassword, 1);
         addDateAndTime(encodedPassword);
         return encodedPassword.toString();
     }
@@ -44,13 +45,14 @@ public class PasswordEncoder {
         decodedPassword.delete(0, LocalDateTimeHelper.SIMPLE_TIME_FORMAT.length())
                 .delete(decodedPassword.length() - LocalDateTimeHelper.SIMPLE_DATE_FORMAT.length(), decodedPassword.length());
 
+        randomLetters(encoderType, decodedPassword, 0);
         switch (encoderType) {
             case REVERSE: {
-                reverseDecode(decodedPassword);
+                reverseEncodeDecode(decodedPassword);
             }
             break;
             case TO_LOWER_CASE: {
-//                encodedPassword
+                toLowerCaseDecode(decodedPassword);
             }
             break;
         }
@@ -69,31 +71,42 @@ public class PasswordEncoder {
             }
         }
         encodedPassword.delete(0, encodedPassword.length());
-        encodedPassword.append(temp.toLowerCase());
+        encodedPassword.append(temp.toLowerCase()).append("s").append(temp.length())
+                .append("E").append("C").append(indexis.size()).append("t");
         encodedPassword.append(ListHelper.getListAsStringWithDelimiter(indexis, null));
-        randomLetters(EncoderType.TO_LOWER_CASE, encodedPassword, 1);
+    }
+
+    public static void toLowerCaseDecode(StringBuilder decodedPassword) {
+        //ivanovC1t0
+        List<Integer> indexis = new ArrayList<>();
+        String temp = decodedPassword.toString();
+        String substring = decodedPassword.substring(decodedPassword.lastIndexOf("t") + 1);
+        if (substring.length() == 1) {
+
+        }else{
+            String[] split = substring.split(",");
+        }
+
+        for (int i = 0; i < temp.length(); i++) {
+            char currentChar = temp.charAt(i);
+            if (Character.isLetter(currentChar) && Character.isUpperCase(currentChar)) {
+                indexis.add(i);
+            }
+        }
+
     }
 
     /*reverse*/
-    private static void reverseEncode(StringBuilder encodedPassword) {
-        EncoderType reverse = EncoderType.REVERSE;
-        encodedPassword.reverse();
-        randomLetters(reverse, encodedPassword, 1);
-    }
-
-    private static void reverseDecode(StringBuilder decodedPassword) {
-        EncoderType reverse = EncoderType.REVERSE;
-        randomLetters(reverse, decodedPassword, 0);
-        System.out.println(decodedPassword);
-        System.out.println();
+    private static void reverseEncodeDecode(StringBuilder decodedPassword) {
+        decodedPassword.reverse();
     }
 
     /* common*/
     private static void addDateAndTime(StringBuilder encodedPassword) {
         LocalDateTime localDateTime = LocalDateTime.now();
-        encodedPassword.insert(0, LocalDateTimeHelper.localTime(localDateTime.toLocalTime(),
+        encodedPassword.insert(0, LocalDateTimeHelper.convertLocalTimeToString(localDateTime.toLocalTime(),
                 new StringBuilder(LocalDateTimeHelper.SIMPLE_TIME_FORMAT).reverse().toString()));
-        encodedPassword.append(LocalDateTimeHelper.localDate(localDateTime.toLocalDate(),
+        encodedPassword.append(LocalDateTimeHelper.convertLocalDateToString(localDateTime.toLocalDate(),
                 new StringBuilder(LocalDateTimeHelper.SIMPLE_DATE_FORMAT).reverse().toString()));
     }
 
@@ -101,7 +114,7 @@ public class PasswordEncoder {
         GenerateRandom generateRandom = new GenerateRandom(true);
         if (type == 0) {
             encodedPassword.delete(0, encoderType.getBeginCountLetters())
-                    .delete(encodedPassword.length() - encoderType.getEndCountLetters(), encodedPassword.length()).reverse();
+                    .delete(encodedPassword.length() - encoderType.getEndCountLetters(), encodedPassword.length());
         } else {
             encodedPassword.insert(0, generateRandom.generate(encoderType.getBeginCountLetters()))
                     .append(generateRandom.generate(encoderType.getEndCountLetters()));

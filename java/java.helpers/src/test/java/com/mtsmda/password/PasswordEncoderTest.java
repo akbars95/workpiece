@@ -31,10 +31,10 @@ public class PasswordEncoderTest {
         String encodedPassword = encodePassword(ivanov, reverse);
         assertNotNull(encodedPassword);
         System.out.println(encodedPassword);
-        /*String decodePassword = decodePassword(encodedPassword, reverse);
+        String decodePassword = decodePassword(encodedPassword, reverse);
         assertNotNull(decodePassword);
         assertEquals(ivanov, decodePassword);
-        System.out.println(decodePassword);*/
+        System.out.println(decodePassword);
     }
 
 }

@@ -56,4 +56,8 @@ public class ListHelper {
         return stringBuilder.toString();
     }
 
+    public static <T> List<T> convertArrayToList(T[] array) {
+        return getListWithData(array);
+    }
+
 }

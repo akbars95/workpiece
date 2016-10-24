@@ -190,7 +190,7 @@ public class GenerateRandom {
     }
 
     public static int generateRandomNumberInRange(int min, int max) {
-        return generateRandomNumberInRange(min, max);
+        return (int) generateRandomNumberInRange((long) min, (long)max);
     }
 
     public static long generateRandomNumberInRange(long min, long max) {

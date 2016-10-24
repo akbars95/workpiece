@@ -13,6 +13,7 @@ public class LocalDateTimeHelper {
     public static final String MYSQL_TIME_FORMAT = "HH:mm:ss";
     public static final String MYSQL_DATE_TIME_FORMAT = MYSQL_DATE_FORMAT + " " + MYSQL_TIME_FORMAT;
     public static final String NORMAL_DATE_TIME_FORMAT = "dd.MM.yyyy" + " " + MYSQL_TIME_FORMAT;
+    public static final String ORACLE_DATE_TIME_FORMAT = MYSQL_DATE_FORMAT + " " + MYSQL_TIME_FORMAT;
     public static final String SIMPLE_DATE_FORMAT = "ddMMyyyy";
     public static final String SIMPLE_TIME_FORMAT = "HHmmss";
     public static final String SIMPLE_DATETIME_FORMAT = SIMPLE_DATE_FORMAT + " " + SIMPLE_TIME_FORMAT;
@@ -24,15 +25,15 @@ public class LocalDateTimeHelper {
         return localDateTime.format(DateTimeFormatter.ofPattern("HHmmss|ddMMyyyy"));
     }
 
-    public static String localDate(LocalDate localDate, String format) {
+    public static String convertLocalDateToString(LocalDate localDate, String format) {
         return localDate.format(DateTimeFormatter.ofPattern(format));
     }
 
-    public static String localTime(LocalTime localTime, String format) {
+    public static String convertLocalTimeToString(LocalTime localTime, String format) {
         return localTime.format(DateTimeFormatter.ofPattern(format));
     }
 
-    public static String localDateTime(LocalDateTime localDateTime, String format) {
+    public static String convertLocalDateTimeToString(LocalDateTime localDateTime, String format) {
         return localDateTime.format(DateTimeFormatter.ofPattern(format));
     }
 

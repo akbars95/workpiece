@@ -31,21 +31,21 @@ public class LocalDateTimeHelperTest {
 
     @Test
     public void localDateTest(){
-        assertEquals(localDate(this.localDate, "ddMMyyyy"), "11102010");
-        assertNotEquals(localDate(this.localDate, "ddMMyyyy"), "111020.10");
+        assertEquals(convertLocalDateToString(this.localDate, "ddMMyyyy"), "11102010");
+        assertNotEquals(convertLocalDateToString(this.localDate, "ddMMyyyy"), "111020.10");
     }
 
     @Test
     public void localTimeTest(){
-        assertEquals(localTime(this.localTime, "HHmmss"), "152030");
-        assertNotEquals(localTime(this.localTime, "HHmmss"), "111020.10");
+        assertEquals(convertLocalTimeToString(this.localTime, "HHmmss"), "152030");
+        assertNotEquals(convertLocalTimeToString(this.localTime, "HHmmss"), "111020.10");
     }
 
     @Test
     public void localDateTimeTest(){
-        assertEquals(localDateTime(localDateTime, "yyyyMMdd HHmmss"), "20101011 152030");
-        assertNotEquals(localDateTime(localDateTime, "yyyyMMdd HH:mmss"), "20101011 152030");
-        assertEquals(localDateTime(localDateTime, LocalDateTimeHelper.NORMAL_DATE_TIME_FORMAT), "11.10.2010 15:20:30");
+        assertEquals(LocalDateTimeHelper.convertLocalDateTimeToString(localDateTime, "yyyyMMdd HHmmss"), "20101011 152030");
+        assertNotEquals(LocalDateTimeHelper.convertLocalDateTimeToString(localDateTime, "yyyyMMdd HH:mmss"), "20101011 152030");
+        assertEquals(LocalDateTimeHelper.convertLocalDateTimeToString(localDateTime, LocalDateTimeHelper.NORMAL_DATE_TIME_FORMAT), "11.10.2010 15:20:30");
     }
 
     @Test

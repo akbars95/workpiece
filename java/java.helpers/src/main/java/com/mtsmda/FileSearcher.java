@@ -6,9 +6,7 @@ import com.mtsmda.helper.ObjectHelper;
 import java.io.File;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,7 +24,7 @@ public class FileSearcher {
 
     private Map<String, Integer> searchExtensions(File file) {
         LocalDateTime localDateTimeStart = LocalDateTime.now();
-        System.out.println(file.getAbsoluteFile() + "\nstart - " + LocalDateTimeHelper.localDateTime(localDateTimeStart, LocalDateTimeHelper.NORMAL_DATE_TIME_FORMAT));
+        System.out.println(file.getAbsoluteFile() + "\nstart - " + LocalDateTimeHelper.convertLocalDateTimeToString(localDateTimeStart, LocalDateTimeHelper.NORMAL_DATE_TIME_FORMAT));
         if (ObjectHelper.objectIsNull(file)) {
             throw new RuntimeException("input file name is null");
         }
@@ -37,7 +35,7 @@ public class FileSearcher {
 
         recursiveSearchFiles(file);
         LocalDateTime localDateTimeEnd = LocalDateTime.now();
-        System.out.println("end - " + LocalDateTimeHelper.localDateTime(localDateTimeEnd, LocalDateTimeHelper.NORMAL_DATE_TIME_FORMAT));
+        System.out.println("end - " + LocalDateTimeHelper.convertLocalDateTimeToString(localDateTimeEnd, LocalDateTimeHelper.NORMAL_DATE_TIME_FORMAT));
         System.out.println(Duration.between(localDateTimeStart, localDateTimeEnd).getSeconds() + " seconds");
         return result;
     }
