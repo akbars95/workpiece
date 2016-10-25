@@ -14,11 +14,19 @@ public class SetHelper {
     }
 
     public static String convertSetToStringWithDelimiter(Set<?> set, String delimiter) {
+        return convertSetToStringWithDelimiter(set, delimiter, null, false);
+    }
+
+    public static String convertSetToStringWithDelimiter(Set<?> set, String delimiter, String prefix, boolean firstElementWithPrefix) {
         StringBuilder stringBuilder = new StringBuilder();
         final String delimiterInner = StringUtils.isNotBlank(delimiter) ? delimiter : ",";
+        final String prefixInner = StringUtils.isNotBlank(prefix) ? prefix : "";
         set.forEach(o -> {
-            stringBuilder.append(o).append(delimiterInner);
+            stringBuilder.append(prefixInner).append(o).append(delimiterInner);
         });
+        if (StringUtils.isNotBlank(prefix) && !firstElementWithPrefix && stringBuilder.toString().startsWith(prefixInner)) {
+            stringBuilder.delete(0, prefixInner.length());
+        }
         if (stringBuilder.toString().endsWith(delimiterInner)) {
             stringBuilder.delete(stringBuilder.lastIndexOf(delimiterInner), stringBuilder.length());
         }

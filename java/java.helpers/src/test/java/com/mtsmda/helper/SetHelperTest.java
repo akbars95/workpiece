@@ -40,6 +40,28 @@ public class SetHelperTest {
     }
 
     @Test
+    public void testConvertSetToStringWithDelimiterAndPrefix() {
+        Set<String> set = createSet("Str1", "Str2", "Str3");
+        String s = convertSetToStringWithDelimiter(set, null, "", false);
+        assertNotNull(s);
+        assertEquals(s, "Str1,Str2,Str3");
+        set.removeIf(s1 -> {
+            return s1.equals("Str3");
+        });
+        s = convertSetToStringWithDelimiter(set, "-|-|-", ":", false);
+        assertNotNull(s);
+        assertEquals(s, "Str1-|-|-:Str2");
+
+        s = convertSetToStringWithDelimiter(set, "-|-|-", ":", true);
+        assertNotNull(s);
+        assertEquals(s, ":Str1-|-|-:Str2");
+
+        s = convertSetToStringWithDelimiter(set, "-|-|-", "IoN", false);
+        assertNotNull(s);
+        assertEquals(s, "Str1-|-|-IoNStr2");
+    }
+
+    @Test
     public void testCreateSet() {
         Set<String> set = createSet("Str1", "Str2", "Str3");
         assertNotNull(set);
