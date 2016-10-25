@@ -2,10 +2,7 @@ package com.mtsmda.helper;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by dminzat on 10/24/2016.
@@ -37,7 +34,7 @@ public class SetHelper {
     }
 
     public static <T> Set<T> createSet(T... ts) {
-        Set<T> tSet = new HashSet<>();
+        Set<T> tSet = new LinkedHashSet<T>();
         for (T current : ts) {
             tSet.add(current);
         }
