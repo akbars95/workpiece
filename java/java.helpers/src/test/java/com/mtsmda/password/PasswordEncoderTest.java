@@ -2,7 +2,11 @@ package com.mtsmda.password;
 
 
 import com.mtsmda.generator.password.EncoderType;
+import com.mtsmda.helper.ListHelper;
 import org.testng.annotations.Test;
+
+import java.util.List;
+import java.util.Map;
 
 import static com.mtsmda.generator.password.PasswordEncoder.*;
 import static org.testng.Assert.*;
@@ -35,6 +39,16 @@ public class PasswordEncoderTest {
         assertNotNull(decodePassword);
         assertEquals(ivanov, decodePassword);
         System.out.println(decodePassword);
+
+        List<String> passwords = ListHelper.getListWithData("IvaNoVic190", "5345$%$iojikNasH", "this is passwordSesE");
+        passwords.forEach(current ->{
+            String encodePassword = encodePassword(current, reverse);
+            assertNotNull(encodePassword);
+            String decodePassword1 = decodePassword(encodePassword, reverse);
+            assertNotNull(decodePassword1);
+            assertEquals(decodePassword1, current);
+        });
+
     }
 
 }

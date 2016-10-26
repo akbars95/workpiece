@@ -3,6 +3,7 @@ package com.mtsmda.generator.password;
 import com.mtsmda.generator.GenerateRandom;
 import com.mtsmda.helper.ListHelper;
 import com.mtsmda.helper.LocalDateTimeHelper;
+import com.mtsmda.helper.StringHelper;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
@@ -26,6 +27,10 @@ public class PasswordEncoder {
             }
             break;
             case TO_LOWER_CASE: {
+                toLowerCaseEncode(encodedPassword);
+            }
+            break;
+            case TO_UPPER_CASE: {
                 toLowerCaseEncode(encodedPassword);
             }
             break;
@@ -55,6 +60,10 @@ public class PasswordEncoder {
                 toLowerCaseDecode(decodedPassword);
             }
             break;
+            case TO_UPPER_CASE: {
+                toLowerCaseDecode(decodedPassword);
+            }
+            break;
         }
 
         return decodedPassword.toString();
@@ -71,29 +80,29 @@ public class PasswordEncoder {
             }
         }
         encodedPassword.delete(0, encodedPassword.length());
-        encodedPassword.append(temp.toLowerCase()).append("s").append(temp.length())
-                .append("E").append("C").append(indexis.size()).append("t");
+        encodedPassword.append(temp.toLowerCase()).append("sE").append(temp.length())
+                .append("Ct").append(indexis.size()).append("In");
         encodedPassword.append(ListHelper.getListAsStringWithDelimiter(indexis, null));
     }
 
     public static void toLowerCaseDecode(StringBuilder decodedPassword) {
-        //ivanovC1t0
-        List<Integer> indexis = new ArrayList<>();
+        //ivanovsE6Ct1In0
         String temp = decodedPassword.toString();
-        String substring = decodedPassword.substring(decodedPassword.lastIndexOf("t") + 1);
-        if (substring.length() == 1) {
+        String passwordLength = decodedPassword.substring(decodedPassword.lastIndexOf("sE") + 2, decodedPassword.lastIndexOf("Ct"));
+        String indexisSize = decodedPassword.substring(decodedPassword.lastIndexOf("Ct") + 2, decodedPassword.lastIndexOf("In"));
+        String indexisStr = decodedPassword.substring(decodedPassword.lastIndexOf("In") + 2);
 
-        }else{
-            String[] split = substring.split(",");
+        String password = decodedPassword.subSequence(0, Integer.parseInt(passwordLength)).toString();
+        String [] indexisArray = indexisStr.split(",");
+        if(Integer.parseInt(indexisSize) != indexisArray.length){
+            throw new RuntimeException("Password cannot decode!");
         }
-
-        for (int i = 0; i < temp.length(); i++) {
-            char currentChar = temp.charAt(i);
-            if (Character.isLetter(currentChar) && Character.isUpperCase(currentChar)) {
-                indexis.add(i);
-            }
+        for (String currentIndex : indexisArray){
+            int currentIndexInt = Integer.parseInt(currentIndex);
+            password = StringHelper.replaceByIndex(password, currentIndexInt, new Character(password.charAt(currentIndexInt)).toString().toUpperCase());
         }
-
+        decodedPassword.delete(0, decodedPassword.length());
+        decodedPassword.append(password);
     }
 
     /*reverse*/
