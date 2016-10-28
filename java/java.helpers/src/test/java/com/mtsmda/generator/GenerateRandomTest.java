@@ -246,6 +246,25 @@ public class GenerateRandomTest {
         assertTrue(aDouble >= 1_000_000 && aDouble <= (1_000_000 + 10), "check long values");
     }
 
+
+    @Test
+    public void test1014RUSSIAN_LETTER_AND_ENGLISH_LETTER_AND_NUMBERS(){
+        generateRandom = new GenerateRandom(GenerateRandom.RUSSIAN_LETTER_AND_ENGLISH_LETTER_AND_NUMBERS);
+        List<Character> characters = generateRandom.getCharacters();
+        assertNotNull(characters);
+        assertEquals(characters.size(), 76);
+
+        String generate = generateRandom.generate(25);
+        assertNotNull(generate);
+        for (int i = 0; i < generate.length(); i++) {
+            assertTrue(Character.isLetterOrDigit(generate.charAt(i)));
+            assertTrue(Character.isLowerCase(generate.charAt(i)) || Character.isUpperCase(generate.charAt(i)) || Character.isDigit(generate.charAt(i)));
+            assertFalse(Character.isSpaceChar(generate.charAt(i)));
+            assertFalse(Character.isWhitespace(generate.charAt(i)));
+        }
+        assertTrue(generate.length() == 25);
+    }
+
     @Test
     public void testGenerateRandomNumber(){
         List<Range> ranges = ListHelper.getListWithData(new Range(0, 9), new Range(9, 100), new Range(1_000, 2_000));

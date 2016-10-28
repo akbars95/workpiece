@@ -44,26 +44,28 @@ public class FileSearcher {
         if (ObjectHelper.objectIsNotNull(file) && file.isDirectory()) {
             countDirectories++;
             File[] files = file.listFiles();
-            System.out.println("" + files.length);
-            for (File current : files) {
+//            System.out.println("" + ((files != null)? files.length : ""));
+            if(files != null) {
+                for (File current : files) {
                 /*if("C://Cookies".equals(file.getAbsolutePath())){
                     System.out.println(file.getAbsoluteFile() + " _ " + file.isDirectory());
                 }*/
-                recursiveSearchFiles(current);
+                    recursiveSearchFiles(current);
+                }
             }
         } else {
             countFile++;
             String nameExtension = null;
             try {
+                System.out.println(file.getAbsoluteFile());
                 nameExtension = file.getName().substring(file.getName().lastIndexOf("."));
             } catch (RuntimeException e) {
-                System.out.println(file.getAbsoluteFile());
                 nameExtension = ".file";
             }
             if (result.containsKey(nameExtension)) {
                 result.put(nameExtension, result.get(nameExtension) + 1);
             } else {
-                result.put(nameExtension, 0);
+                result.put(nameExtension, 1);
             }
         }
     }
@@ -94,18 +96,26 @@ public class FileSearcher {
 
     public static void main(String[] args) {
         FileSearcher fileSearcher = new FileSearcher();
-        for(File rootCurrent : File.listRoots()){
-            System.out.println(rootCurrent.getAbsoluteFile());
-            Map<String, Integer> extensions = fileSearcher.searchExtensions(rootCurrent.getAbsoluteFile());
-            extensions.forEach((key, value) -> {
-                System.out.println(key + " - " + value);
-            });
-            System.out.println("Count files - " + fileSearcher.countFile);
-            System.out.println("Count directories - " + fileSearcher.countDirectories);
-        }
-        File file = new File("C:\\Cookies");
+//        for(File rootCurrent : File.listRoots()){
+//            System.out.println(rootCurrent.getAbsoluteFile());
+//            Map<String, Integer> extensions = fileSearcher.searchExtensions(rootCurrent.getAbsoluteFile());
+//            extensions.forEach((key, value) -> {
+//                System.out.println(key + " - " + value);
+//            });
+//            System.out.println("Count files - " + fileSearcher.countFile);
+//            System.out.println("Count directories - " + fileSearcher.countDirectories);
+//        }
+        File file = new File("T:\\development");
         System.out.println(file.exists());
         System.out.println(file.isFile());
+        Map<String, Integer> stringIntegerMap = fileSearcher.searchExtensions(file);
+        System.out.println(stringIntegerMap.size());
+        System.out.println("_____-----_____");
+        stringIntegerMap.forEach((key, value) ->{
+            if(key.length() <= 5) {
+                System.out.println(key + " = " + value);
+            }
+        });
     }
 
 }

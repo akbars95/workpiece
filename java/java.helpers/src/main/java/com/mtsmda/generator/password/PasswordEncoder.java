@@ -3,6 +3,7 @@ package com.mtsmda.generator.password;
 import com.mtsmda.generator.GenerateRandom;
 import com.mtsmda.helper.ListHelper;
 import com.mtsmda.helper.LocalDateTimeHelper;
+import com.mtsmda.helper.ObjectHelper;
 import com.mtsmda.helper.StringHelper;
 import org.apache.commons.lang3.StringUtils;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 public class PasswordEncoder {
 
     private static final Map<Integer, List<String>> numberAndLetters = new LinkedHashMap<>();
+    private static List<Character> characters;
 
     static {
         /*a	b	c	d	e	f	g	h	i	j	k	l	m	n	o	p	q	r	s	t	u	v	w	x	y	z
@@ -32,6 +34,7 @@ public class PasswordEncoder {
         9 Ъ Ы Ь xy
         0 Э Ю Я z
          */
+        //Ivanov = 3-5_
         List<String> number1 = ListHelper.getListWithData("A", "a", "b", "B", "c", "C", "А", "а", "Б", "б", "в", "В");
         List<String> number2 = ListHelper.getListWithData("D", "d", "E", "e", "f", "F", "Г", "г", "Д", "д", "Е", "е");
         List<String> number3 = ListHelper.getListWithData("G", "g", "H", "h", "i", "I", "Ё", "ё", "ж", "Ж", "з", "З");
@@ -54,7 +57,7 @@ public class PasswordEncoder {
         numberAndLetters.put(9, number9);
     }
 
-    public static String encodePassword(String rawPassword, EncoderType encoderType) {
+    public static String encodePassword(String rawPassword, EncoderType encoderType, Integer shiftNumber) {
         if (StringUtils.isBlank(rawPassword)) {
             throw new RuntimeException("Input password is null or empty!");
         }
@@ -77,6 +80,24 @@ public class PasswordEncoder {
                 phoneEncode(encodedPassword);
             }
             break;
+            case SHIFT_DEFAULT: {
+                shiftEncode(encodedPassword, 9);
+            }
+            break;
+            case SHIFT_RANDOM: {
+                int generateRandomNumberInRange = GenerateRandom.generateRandomNumberInRange(11, 99);
+                shiftEncode(encodedPassword, generateRandomNumberInRange);
+                encodedPassword.append(generateRandomNumberInRange);
+            }
+            break;
+            case SHIFT_CUSTOM: {
+                if (ObjectHelper.objectIsNull(shiftNumber)) {
+                    throw new RuntimeException("You choose shift custom, but custom number is null!");
+                }
+                shiftEncode(encodedPassword, shiftNumber);
+                encodedPassword.append(shiftNumber);
+            }
+            break;
         }
 
         randomLetters(encoderType, encodedPassword, 1);
@@ -84,7 +105,11 @@ public class PasswordEncoder {
         return encodedPassword.toString();
     }
 
-    public static String decodePassword(String encodedPassword, EncoderType encoderType) {
+    public static String encodePassword(String rawPassword, EncoderType encoderType) {
+        return encodePassword(rawPassword, encoderType, null);
+    }
+
+    public static String decodePassword(String encodedPassword, EncoderType encoderType, Integer shiftNumber) {
         if (StringUtils.isBlank(encodedPassword)) {
             throw new RuntimeException("Input password is null or empty!");
         }
@@ -107,28 +132,124 @@ public class PasswordEncoder {
                 toLowerUpperCaseDecode(decodedPassword, false);
             }
             break;
+            case PHONE_TYPE_CUSTOM: {
+                phoneDecode(decodedPassword);
+            }
+            break;
+            case SHIFT_DEFAULT: {
+                shiftDecode(decodedPassword);
+            }
+            break;
+            case SHIFT_RANDOM: {
+                int generateRandomNumberInRange = Integer.parseInt(decodedPassword.substring(decodedPassword.length() - 2));
+                decodedPassword.delete(decodedPassword.length() - 2, decodedPassword.length());
+                shiftDecode(decodedPassword, generateRandomNumberInRange);
+            }
+            break;
+            case SHIFT_CUSTOM: {
+                if (ObjectHelper.objectIsNull(shiftNumber)) {
+                    throw new RuntimeException("You choose shift custom, but custom number is null!");
+                }
+                int generateRandomNumberInRange = Integer.parseInt(decodedPassword.substring(decodedPassword.length() - shiftNumber.toString().length()));
+                decodedPassword.delete(decodedPassword.length() - shiftNumber.toString().length(), decodedPassword.length());
+                shiftDecode(decodedPassword, shiftNumber);
+            }
+            break;
         }
 
         return decodedPassword.toString();
     }
 
+    public static String decodePassword(String encodedPassword, EncoderType encoderType) {
+        return decodePassword(encodedPassword, encoderType, null);
+    }
+
+    /*shift encode*/
+    private static void shiftEncode(StringBuilder encodedPassword, int shiftNumber, boolean isPlus) {
+        String temp = clearFinalStringBuilder(encodedPassword);
+        for (int i = 0; i < temp.length(); i++) {
+            int i1 = getCharacters().indexOf(temp.charAt(i));
+            if (i1 == -1) {
+                encodedPassword.append("r").append(temp.charAt(i));
+            } else {
+                if (isPlus) {
+                    i1 += shiftNumber;
+                } else {
+                    i1 -= shiftNumber;
+                }
+                encodedPassword.append(StringHelper.addLedZero(i1 + "", 5));
+            }
+            encodedPassword.append("0ЗI");
+        }
+        encodedPassword.append((isPlus) ? "+" : "-");
+    }
+
+    private static void shiftEncode(StringBuilder encodedPassword, int shiftNumber) {
+        shiftEncode(encodedPassword, shiftNumber, true);
+    }
+
+    private static void shiftDecode(StringBuilder decodedPassword, int shiftNumber) {
+        String temp = clearFinalStringBuilder(decodedPassword);
+        char lastChar = temp.charAt(temp.length() - 1);
+        if (lastChar == '+' || lastChar == '-') {
+            temp = temp.substring(0, temp.length() - 1);
+        }
+        boolean isPlus = lastChar == '+' ? false : true;
+
+        String[] split = temp.split("0ЗI");
+        for (String current : split) {
+            String[] rs = current.split("r");
+            if (rs.length == 1) {
+                String t = StringHelper.deleteLedZero(rs[0]);
+                long l = Long.parseLong(t);
+                if (isPlus) {
+                    l += shiftNumber;
+                } else {
+                    l -= shiftNumber;
+                }
+                decodedPassword.append(getCharacters().get((int) l));
+            } else if (rs.length == 2) {
+                decodedPassword.append(rs[1]);
+            }
+        }
+    }
+
+    private static void shiftDecode(StringBuilder decodedPassword) {
+        shiftDecode(decodedPassword, 9);
+    }
+
     /*phone encode*/
-    private static void phoneEncode(StringBuilder encodedPassword){
-        String temp = encodedPassword.toString();
-        encodedPassword.delete(0, encodedPassword.length());
-        for(int i = 0; i < temp.length(); i++){
+    private static void phoneEncode(StringBuilder encodedPassword) {
+        String temp = clearFinalStringBuilder(encodedPassword);
+        for (int i = 0; i < temp.length(); i++) {
             Character current = temp.charAt(i);
-            if(Character.isLetter(current)){
+            if (Character.isLetter(current)) {
                 encodedPassword.append(getPhoneTypeNumbers(current + ""));
-            }else{
-                encodedPassword.append(current).append("|");
+            } else {
+                encodedPassword.append(current);
+            }
+            encodedPassword.append("_");
+        }
+    }
+
+    private static void phoneDecode(StringBuilder decodedPassword) {
+        //3_3|8_8|1_1|5_5|5_5|8_8|
+        String temp = clearFinalStringBuilder(decodedPassword);
+        String[] split = temp.split("_");
+        for (String currentSplit : split) {
+            String[] positions = currentSplit.split("-");
+            if (positions.length == 1) {
+                decodedPassword.append(positions[0]);
+            }
+            if (positions.length == 2) {
+                decodedPassword.append(numberAndLetters.get(Integer.parseInt(positions[0])).get(Integer.parseInt(positions[1])));
             }
         }
     }
 
     /*to lower upper case*/
     private static void toLowerUpperCaseEncode(StringBuilder encodedPassword, boolean isLower) {
-        String temp = encodedPassword.toString();
+        String temp = clearFinalStringBuilder(encodedPassword);
         List<Integer> indexis = new ArrayList<>();
         for (int i = 0; i < temp.length(); i++) {
             char currentChar = temp.charAt(i);
@@ -137,7 +258,6 @@ public class PasswordEncoder {
                 indexis.add(i);
             }
         }
-        encodedPassword.delete(0, encodedPassword.length());
         if (isLower) {
             encodedPassword.append(temp.toLowerCase());
         } else {
@@ -198,13 +318,13 @@ public class PasswordEncoder {
         }
     }
 
-    private static String getPhoneTypeNumbers(String letter){
+    private static String getPhoneTypeNumbers(String letter) {
         int ik = 0;
-        for(Integer key : numberAndLetters.keySet()){
+        for (Integer key : numberAndLetters.keySet()) {
             List<String> strings = numberAndLetters.get(key);
-            for(int i = 0; i < strings.size(); i++){
-                if(strings.get(i).equals(letter)){
-                    return "|" + ik + "_" + key;
+            for (int i = 0; i < strings.size(); i++) {
+                if (strings.get(i).equals(letter)) {
+                    return ik + "-" + i;
                 }
             }
             ik++;
@@ -212,4 +332,16 @@ public class PasswordEncoder {
         return null;
     }
 
+    private static List<Character> getCharacters() {
+        if (ObjectHelper.objectIsNull(PasswordEncoder.characters)) {
+            characters = new GenerateRandom(GenerateRandom.RUSSIAN_LETTER_AND_ENGLISH_LETTER_AND_NUMBERS).getCharacters();
+        }
+        return characters;
+    }
+
+    private static String clearFinalStringBuilder(StringBuilder endecodedPassword) {
+        String temp = endecodedPassword.toString();
+        endecodedPassword.delete(0, endecodedPassword.length());
+        return temp;
+    }
 }

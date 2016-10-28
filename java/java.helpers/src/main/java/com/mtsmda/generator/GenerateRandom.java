@@ -26,6 +26,7 @@ public class GenerateRandom {
     public static final int ONLY_RUSSIAN_LETTER = 2;
     public static final int RUSSIAN_LETTER_AND_NUMBERS = 3;
     public static final int ONLY_NUMBERS = 4;
+    public static final int RUSSIAN_LETTER_AND_ENGLISH_LETTER_AND_NUMBERS = 5;
 
     public GenerateRandom() {
         this.setViaCustomChars = true;
@@ -51,6 +52,13 @@ public class GenerateRandom {
             break;
             case ONLY_NUMBERS: {
                 this.numbers = true;
+            }break;
+            case RUSSIAN_LETTER_AND_ENGLISH_LETTER_AND_NUMBERS:{
+                this.numbers = true;
+                this.englishBigLetter = true;
+                this.englishSmallLetter = true;
+                this.russianBigLetter = true;
+                this.russianSmallLetter = true;
             }
         }
         this.setViaCustomChars = true;
@@ -220,4 +228,6 @@ public class GenerateRandom {
         }
         return result.toString();
     }
+
+
 }
