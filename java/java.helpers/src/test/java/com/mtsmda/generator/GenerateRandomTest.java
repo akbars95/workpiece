@@ -252,7 +252,7 @@ public class GenerateRandomTest {
         generateRandom = new GenerateRandom(GenerateRandom.RUSSIAN_LETTER_AND_ENGLISH_LETTER_AND_NUMBERS);
         List<Character> characters = generateRandom.getCharacters();
         assertNotNull(characters);
-        assertEquals(characters.size(), 76);
+        assertEquals(characters.size(), 128);
 
         String generate = generateRandom.generate(25);
         assertNotNull(generate);
@@ -306,7 +306,12 @@ public class GenerateRandomTest {
             generateRandomNumberInRangeWithCount = GenerateRandom.generateRandomNumberInRangeWithCount(min, max, count);
         }
         catch (RuntimeException e){
-            assertEquals(e.getMessage(), "min should be 0 and max should be 9!");
+            if(min > max){
+                assertEquals(e.getMessage(), "min cannot be more than max!");
+            }else{
+                assertEquals(e.getMessage(), "min should be 0 and max should be 9!");
+            }
+
             return;
         }
         fail("Should be only with exception!");
