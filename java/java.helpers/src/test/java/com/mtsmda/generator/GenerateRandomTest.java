@@ -266,6 +266,17 @@ public class GenerateRandomTest {
     }
 
     @Test
+    public void testGenerateRandomWithDateTime(){
+        generateRandom = new GenerateRandom(GenerateRandom.RUSSIAN_LETTER_AND_ENGLISH_LETTER_AND_NUMBERS);
+        String generateRandomWithDateTime = generateRandom.generateRandomWithDateTime(true);
+        assertNotNull(generateRandomWithDateTime);
+        assertTrue(generateRandomWithDateTime.length() == 15);
+        generateRandomWithDateTime = generateRandom.generateRandomWithDateTime(false);
+        assertNotNull(generateRandomWithDateTime);
+        assertTrue(generateRandomWithDateTime.length() == 29);
+    }
+
+    @Test
     public void testGenerateRandomNumber(){
         List<Range> ranges = ListHelper.getListWithData(new Range(0, 9), new Range(9, 100), new Range(1_000, 2_000));
         ranges.forEach(range -> {

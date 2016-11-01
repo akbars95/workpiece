@@ -1,7 +1,9 @@
 package com.mtsmda.generator;
 
 import com.mtsmda.helper.ListHelper;
+import com.mtsmda.helper.LocalDateTimeHelper;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,8 +54,9 @@ public class GenerateRandom {
             break;
             case ONLY_NUMBERS: {
                 this.numbers = true;
-            }break;
-            case RUSSIAN_LETTER_AND_ENGLISH_LETTER_AND_NUMBERS:{
+            }
+            break;
+            case RUSSIAN_LETTER_AND_ENGLISH_LETTER_AND_NUMBERS: {
                 this.numbers = true;
                 this.englishBigLetter = true;
                 this.englishSmallLetter = true;
@@ -198,7 +201,7 @@ public class GenerateRandom {
     }
 
     public static int generateRandomNumberInRange(int min, int max) {
-        return (int) generateRandomNumberInRange((long) min, (long)max);
+        return (int) generateRandomNumberInRange((long) min, (long) max);
     }
 
     public static long generateRandomNumberInRange(long min, long max) {
@@ -217,16 +220,25 @@ public class GenerateRandom {
         if (min < 0 || max > 9) {
             throw new RuntimeException("min should be 0 and max should be 9!");
         }
-        if(min > max){
+        if (min > max) {
             throw new RuntimeException("min cannot be more than max!");
         }
-        if(count < 1){
+        if (count < 1) {
             System.out.println("Count should be more than 1");
         }
         for (int i = 0; i < count; i++) {
             result.append(generateRandomNumberInRange(min, max));
         }
         return result.toString();
+    }
+
+    public String generateRandomWithDateTime(boolean onlyDateTime) {
+        StringBuilder result = new StringBuilder(LocalDateTimeHelper.convertLocalDateTimeToString(LocalDateTime.now()));
+        if (onlyDateTime) {
+            return result.toString();
+        }
+        return result.insert(0, generate(9)).append(generate(5)).toString();
+
     }
 
 
