@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mtsmda.spring.helper</groupId>
+    <artifactId>spring-helper</artifactId>
+    <version>1.1.RELEASE.02112016</version>
+    <packaging>jar</packaging>
+
+    <name>spring-helper</name>
+    <url>http://maven.apache.org</url>
+
+    <parent>
+        <groupId>com.mtsmda.workpiece.maven</groupId>
+        <artifactId>common</artifactId>
+        <version>1.7.RELEASE.30092016</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>${org.springframework.groupId}</groupId>
+            <artifactId>${spring.artifactId}-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${org.springframework.groupId}</groupId>
+            <artifactId>${spring.artifactId}-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${org.springframework.groupId}</groupId>
+            <artifactId>${spring.artifactId}-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${org.springframework.groupId}</groupId>
+            <artifactId>${spring.artifactId}-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${org.springframework.groupId}</groupId>
+            <artifactId>${spring.artifactId}-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${org.springframework.groupId}</groupId>
+            <artifactId>${spring.artifactId}-tx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${org.springframework.groupId}</groupId>
+            <artifactId>${spring.artifactId}-context-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${org.springframework.groupId}</groupId>
+            <artifactId>${spring.artifactId}-expression</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${org.springframework.groupId}</groupId>
+            <artifactId>${spring.artifactId}-jdbc</artifactId>
+        </dependency>
+
+        <!--logger-->
+        <dependency>
+            <groupId>${log4j.groupId}</groupId>
+            <artifactId>${log4j.groupId}</artifactId>
+        </dependency>
+
+        <!--freemarker-->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+        </dependency>
+
+        <!--mail-->
+        <dependency>
+            <groupId>${org.apache.commons.groupId}</groupId>
+            <artifactId>commons-email</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mtsmda.workpiece.java</groupId>
+            <artifactId>java.helpers</artifactId>
+            <version>1.5.1.RELEASE.01112016</version>
+        </dependency>
+
+    </dependencies>
+</project>

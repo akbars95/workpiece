@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.mtsmda.spring.helper"/>
+
+    <util:list id="emailAddressList" list-class="java.util.ArrayList" value-type="java.lang.String">
+        <value>artem.borisov0922@yandex.ru</value>
+        <value>vladimir.grigoriev0922@yandex.ru</value>
+        <value>dmitrii.ejov0922@yandex.ru</value>
+    </util:list>
+
+    <bean id="configurationFreemarker" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+        <property name="templateLoaderPath" value="classpath:/freemarker/"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+
+    <bean id="freeMarkerFacade" class="com.mtsmda.spring.helper.configuration.FreeMarkerFacade">
+        <property name="configuration" ref="configurationFreemarker"/>
+    </bean>
+
+    <!-- SET default mail properties -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${email.host}"/>
+        <property name="port" value="${email.port}"/>
+        <property name="username" value="${email.username}"/>
+        <property name="password" value="${email.password}"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.host">${email.host}</prop>
+                <prop key="mail.smtp.port">${email.port}</prop>
+                <prop key="mail.debug">${email.property.mail.debug}</prop>
+                <prop key="mail.transport.protocol">${email.property.mail.transport.protocol}</prop>
+                <prop key="mail.smtp.auth">${email.property.mail.smtp.auth}</prop>
+                <prop key="mail.smtp.starttls.enable">${email.property.mail.smtp.starttls.enable}</prop>
+                <prop key="mail.mime.charset">${email.property.mail.mime.charset}</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
