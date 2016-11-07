@@ -6,8 +6,11 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>1.7.1.RELEASE.06102016</version>
+    <version>1.8.RELEASE.07112016</version>
     <packaging>pom</packaging>
+    <description>
+        1.8 - added: spring batch, guava, modified properties
+    </description>
 
     <properties>
         <project.java.version>1.8</project.java.version>
@@ -26,6 +29,7 @@
         <org.hibernate.groupId>org.hibernate</org.hibernate.groupId>
         <org.quartz-scheduler.groupId>org.quartz-scheduler</org.quartz-scheduler.groupId>
         <javax.mail.groupId>javax.mail</javax.mail.groupId>
+        <com.google.guava.groupId>com.google.guava</com.google.guava.groupId>
 
         <!--artifactId-->
         <spring.artifactId>spring</spring.artifactId>
@@ -38,6 +42,7 @@
         <org.thymeleaf.version>3.0.1.RELEASE</org.thymeleaf.version>
         <org.freemarker.version>2.3.23</org.freemarker.version>
         <spring.version>4.3.3.RELEASE</spring.version>
+        <spring.batch.version>3.0.7.RELEASE</spring.batch.version>
         <spring.security.version>4.1.0.RELEASE</spring.security.version>
         <log4j.version>1.2.17</log4j.version>
         <mysql.version><!--6.0.3-->5.1.39</mysql.version>
@@ -60,6 +65,23 @@
         <com.fasterxml.jackson.core.version>2.8.3</com.fasterxml.jackson.core.version>
         <com.fasterxml.jackson.dataformat.version>2.8.3</com.fasterxml.jackson.dataformat.version>
         <org.quartz-scheduler.version>2.2.3</org.quartz-scheduler.version>
+        <super-csv.version>2.4.0</super-csv.version>
+        <jsr250-api.version>1.0</jsr250-api.version>
+        <json-simple.version>1.1.1</json-simple.version>
+        <json-path-assert.version>2.1.0</json-path-assert.version>
+        <commons-lang3.version>3.4</commons-lang3.version>
+        <commons-dbcp2.version>2.1.1</commons-dbcp2.version>
+        <commons-math3.version>3.6.1</commons-math3.version>
+        <commons-compress.version>1.12</commons-compress.version>
+        <commons-collections4.version>4.1</commons-collections4.version>
+        <commons-email.version>1.4</commons-email.version>
+        <commons-io.version>1.3.2</commons-io.version>
+        <commons-csv.version>1.4</commons-csv.version>
+        <javax.mail.version>1.4.7</javax.mail.version>
+        <javax.mail-api.version>1.5.5</javax.mail-api.version>
+        <com.google.guava.version>20.0</com.google.guava.version>
+        <com.google.guava-collections.version>r03</com.google.guava-collections.version>
+        <com.google.guava-base.version>r03</com.google.guava-base.version>
 
         <!--plugins-->
         <org.apache.maven.plugins.groupId>org.apache.maven.plugins</org.apache.maven.plugins.groupId>
@@ -80,6 +102,23 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--guava-->
+            <dependency>
+                <groupId>${com.google.guava.groupId}</groupId>
+                <artifactId>guava-base</artifactId>
+                <version>${com.google.guava-base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${com.google.guava.groupId}</groupId>
+                <artifactId>guava</artifactId>
+                <version>${com.google.guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${com.google.guava.groupId}</groupId>
+                <artifactId>guava-collections</artifactId>
+                <version>${com.google.guava-collections.version}</version>
+            </dependency>
+
             <!--scheduler-->
             <dependency>
                 <groupId>${org.quartz-scheduler.groupId}</groupId>
@@ -96,7 +135,7 @@
             <dependency>
                 <groupId>net.sf.supercsv</groupId>
                 <artifactId>super-csv</artifactId>
-                <version>2.4.0</version>
+                <version>${super-csv.version}</version>
             </dependency>
 
             <!--validation-->
@@ -184,6 +223,7 @@
                 <version>${org.freemarker.version}</version>
             </dependency>
 
+            <!--thymeleaf-->
             <dependency>
                 <groupId>${org.thymeleaf.groupId}</groupId>
                 <artifactId>thymeleaf</artifactId>
@@ -230,7 +270,7 @@
             <dependency>
                 <groupId>javax.annotation</groupId>
                 <artifactId>jsr250-api</artifactId>
-                <version>1.0</version>
+                <version>${jsr250-api.version}</version>
             </dependency>
 
             <!--spring-->
@@ -289,13 +329,17 @@
                 <artifactId>${spring.artifactId}-oxm</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>${org.springframework.groupId}.batch</groupId>
+                <artifactId>${spring.artifactId}-batch-core</artifactId>
+                <version>${spring.batch.version}</version>
+            </dependency>
 
             <!-- json -->
             <dependency>
                 <groupId>com.googlecode.json-simple</groupId>
                 <artifactId>json-simple</artifactId>
-                <version>1.1.1</version>
+                <version>${json-simple.version}</version>
             </dependency>
 
             <dependency>
@@ -332,7 +376,7 @@
             <dependency>
                 <groupId>com.jayway.jsonpath</groupId>
                 <artifactId>json-path-assert</artifactId>
-                <version>2.1.0</version>
+                <version>${json-path-assert.version}</version>
             </dependency>
 
             <!--logger-->
@@ -410,47 +454,49 @@
                 <artifactId>sqlite-jdbc</artifactId>
                 <version>${sqlite.version}</version>
             </dependency>
+
             <!--commons-->
             <dependency>
                 <groupId>${org.apache.commons.groupId}</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.4</version>
+                <version>${commons-lang3.version}</version>
             </dependency>
             <dependency>
                 <groupId>${org.apache.commons.groupId}</groupId>
                 <artifactId>commons-dbcp2</artifactId>
-                <version>2.1.1</version>
+                <version>${commons-dbcp2.version}</version>
             </dependency>
             <dependency>
                 <groupId>${org.apache.commons.groupId}</groupId>
                 <artifactId>commons-math3</artifactId>
-                <version>3.6.1</version>
+                <version>${commons-math3.version}</version>
             </dependency>
             <dependency>
                 <groupId>${org.apache.commons.groupId}</groupId>
                 <artifactId>commons-compress</artifactId>
-                <version>1.12</version>
+                <version>${commons-compress.version}</version>
             </dependency>
             <dependency>
                 <groupId>${org.apache.commons.groupId}</groupId>
                 <artifactId>commons-collections4</artifactId>
-                <version>4.1</version>
+                <version>${commons-collections4.version}</version>
             </dependency>
             <dependency>
                 <groupId>${org.apache.commons.groupId}</groupId>
                 <artifactId>commons-email</artifactId>
-                <version>1.4</version>
+                <version>${commons-email.version}</version>
             </dependency>
             <dependency>
                 <groupId>${org.apache.commons.groupId}</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>1.3.2</version>
+                <version>${commons-io.version}</version>
             </dependency>
             <dependency>
                 <groupId>${org.apache.commons.groupId}</groupId>
                 <artifactId>commons-csv</artifactId>
-                <version>1.4</version>
+                <version>${commons-csv.version}</version>
             </dependency>
+
             <!--jms-->
             <dependency>
                 <groupId>org.apache.activemq</groupId>
@@ -462,15 +508,13 @@
             <dependency>
                 <groupId>${javax.mail.groupId}</groupId>
                 <artifactId>mail</artifactId>
-                <version>1.4.7</version>
+                <version>${javax.mail.version}</version>
             </dependency>
             <dependency>
                 <groupId>${javax.mail.groupId}</groupId>
                 <artifactId>javax.mail-api</artifactId>
-                <version>1.5.5</version>
+                <version>${javax.mail-api.version}</version>
             </dependency>
-
-
 
         </dependencies>
     </dependencyManagement>
