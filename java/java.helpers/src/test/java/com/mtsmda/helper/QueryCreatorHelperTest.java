@@ -142,4 +142,32 @@ public class QueryCreatorHelperTest {
         String selectAll = selectAll(null);
     }
 
+    @Test
+    public void selectCustomTest(){
+        String expected = "SELECT c.name,c.age FROM cities c WHERE c.id = :id";
+        String s = selectCustom(ListHelper.getListWithData("name", "age"), "cities",
+                ListHelper.getListWithData("id"), true);
+        assertNotNull(s);
+        assertEquals(s, expected);
+
+        expected = "SELECT * FROM cities c WHERE c.id = :id";
+        s = selectCustom(null, "cities",
+                ListHelper.getListWithData("id"), true);
+        assertNotNull(s);
+        assertEquals(s, expected);
+
+        expected = "SELECT * FROM cities c WHERE c.id = :id";
+        s = selectCustom(new ArrayList<>(), "cities",
+                ListHelper.getListWithData("id"), true);
+        assertNotNull(s);
+        assertEquals(s, expected);
+
+        expected = "SELECT * FROM cities c";
+        s = selectCustom(new ArrayList<>(), "cities",
+                null, true);
+        assertNotNull(s);
+        assertEquals(s, expected);
+    }
+
+
 }

@@ -145,49 +145,64 @@ public class QueryCreatorHelper {
     }
 
     /*
-    * select c.name, c.age from cities c where c.id = :id;
+    * select c.name, c.age from cities c where c.id = :id
     * */
-    //TODO not finished!
     public static String selectCustom(List<String> selectParams, String tableName, List<String> whereParam, boolean isAnd) {
         if (StringUtils.isBlank(tableName)) {
             throw new RuntimeException("table name is null or empty!");
         }
         final StringBuilder sbResult = new StringBuilder();
         String alias = getAlias(tableName);
-        if(ListHelper.listIsNullOrEmpty(selectParams)){
+        if (ListHelper.listIsNullOrEmpty(selectParams)) {
             sbResult.append(SELECT_ALL).append(SPACE);
-        }else{
+        } else {
             sbResult.append(SELECT).append(SPACE);
-            selectParams.forEach(selectParam->{
-                if(StringUtils.isBlank(selectParam)){
+            selectParams.forEach(selectParam -> {
+                if (StringUtils.isBlank(selectParam)) {
                     throw new RuntimeException("Select param is null or empty!");
                 }
                 sbResult.append(alias).append(DOT).append(selectParam).append(COMMA);
             });
+            if(sbResult.toString().endsWith(COMMA)){
+                String temp = sbResult.substring(0, sbResult.length() - 1);
+                sbResult.delete(0, sbResult.length()).append(temp);
+            }
+            sbResult.append(SPACE);
         }
         checkEndCommaSymbolAndDeleteHim(sbResult);
-        sbResult.append(SPACE).append(FROM).append(SPACE).append(tableName).append(SPACE).append(alias);
+        sbResult.append(FROM).append(SPACE).append(tableName).append(SPACE).append(alias);
 
-        if (ListHelper.listIsNotNullAndNotEmpty(whereParam)){
-            whereParam.forEach(currentWhereParam ->{
+        if (ListHelper.listIsNotNullAndNotEmpty(whereParam)) {
+            sbResult.append(SPACE).append(WHERE);
+            whereParam.forEach(currentWhereParam -> {
                 sbResult.append(SPACE).append(alias).append(DOT).append(currentWhereParam).append(SPACE).append(EQUAL).append(SPACE)
                         .append(COLON).append(currentWhereParam);
-                if(isAnd){
+                if (isAnd) {
                     sbResult.append(SPACE).append(AND);
-                }else{
+                } else {
                     sbResult.append(SPACE).append(OR);
                 }
             });
+            String tempResult = sbResult.toString();
+            if (isAnd) {
+                if(tempResult.endsWith(AND)){
+                    return sbResult.substring(0, sbResult.length() - 3).trim();
+                }
+            } else {
+                if(tempResult.endsWith(OR)){
+                    return sbResult.substring(0, sbResult.length() - 2).trim();
+                }
+            }
         }
-        return sbResult.append(SEMICOLON).toString();
+        return sbResult.toString().trim();
     }
 
-    private static boolean checkEndCommaSymbol(StringBuilder textQuery){
+    private static boolean checkEndCommaSymbol(StringBuilder textQuery) {
         return new Character(textQuery.charAt(textQuery.length() - 1)).toString().equals(COMMA);
     }
 
-    private static void checkEndCommaSymbolAndDeleteHim(StringBuilder textQuery){
-        if(checkEndCommaSymbol(textQuery)){
+    private static void checkEndCommaSymbolAndDeleteHim(StringBuilder textQuery) {
+        if (checkEndCommaSymbol(textQuery)) {
             textQuery.deleteCharAt(textQuery.length() - 1);
         }
     }
