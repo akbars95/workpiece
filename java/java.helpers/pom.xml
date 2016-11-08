@@ -4,13 +4,16 @@
 
     <groupId>com.mtsmda.workpiece.java</groupId>
     <artifactId>java.helpers</artifactId>
-    <version>1.5.2.RELEASE.07112016</version>
+    <version>1.5.3.RELEASE.08112016</version>
     <packaging>jar</packaging>
+    <description>
+        add unicode converter helper class
+    </description>
 
     <parent>
         <groupId>com.mtsmda.workpiece.maven</groupId>
         <artifactId>common</artifactId>
-        <version>1.7.1.RELEASE.06102016</version>
+        <version>1.8.RELEASE.07112016</version>
     </parent>
 
     <name>java.helpers</name>
@@ -29,7 +32,6 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.8.7</version>
         </dependency>
 
         <!--commons-->
@@ -42,27 +44,18 @@
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>${javax.validation.version}</version>
         </dependency>
         <dependency>
             <groupId>${org.hibernate.groupId}</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>${org.hibernate.validator.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
-            <version>2.2.4</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>javax.el</artifactId>
-            <version>2.2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
         </dependency>
     </dependencies>
 </project>
