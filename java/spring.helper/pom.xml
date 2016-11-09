@@ -4,11 +4,12 @@
 
     <groupId>com.mtsmda.spring.helper</groupId>
     <artifactId>spring-helper</artifactId>
-    <version>1.1.1.RELEASE.09112016</version>
+    <version>1.1.2.RELEASE.09112016</version>
     <packaging>jar</packaging>
 
     <description>
         1.1.1.RELEASE.09112016 - add row mapper helper class
+        1.1.2.RELEASE.09112016 - add standard operation repository
     </description>
 
     <name>spring-helper</name>
