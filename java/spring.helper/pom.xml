@@ -4,8 +4,12 @@
 
     <groupId>com.mtsmda.spring.helper</groupId>
     <artifactId>spring-helper</artifactId>
-    <version>1.1.RELEASE.02112016</version>
+    <version>1.1.1.RELEASE.09112016</version>
     <packaging>jar</packaging>
+
+    <description>
+        1.1.1.RELEASE.09112016 - add row mapper helper class
+    </description>
 
     <name>spring-helper</name>
     <url>http://maven.apache.org</url>
@@ -13,7 +17,7 @@
     <parent>
         <groupId>com.mtsmda.workpiece.maven</groupId>
         <artifactId>common</artifactId>
-        <version>1.7.RELEASE.30092016</version>
+        <version>1.8.RELEASE.07112016</version>
     </parent>
 
     <properties>
@@ -79,7 +83,7 @@
         <dependency>
             <groupId>com.mtsmda.workpiece.java</groupId>
             <artifactId>java.helpers</artifactId>
-            <version>1.5.1.RELEASE.01112016</version>
+            <version>1.5.3.RELEASE.08112016</version>
         </dependency>
 
     </dependencies>
