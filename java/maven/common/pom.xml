@@ -6,10 +6,11 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>1.8.RELEASE.07112016</version>
+    <version>1.8.1.RELEASE.10112016</version>
     <packaging>pom</packaging>
     <description>
         1.8 - added: spring batch, guava, modified properties
+        1.8.1 - added jetty plugin profile
     </description>
 
     <properties>
@@ -604,5 +605,35 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>jetty_run</id>
+            <activation>
+                <jdk>${java.version}</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>9.2.11.v20150529</version>
+                        <configuration>
+                            <scanIntervalSeconds>5</scanIntervalSeconds>
+                            <webApp>
+                                <!--http://localhost:8999/common/-->
+                                <contextPath>/${project.artifactId}</contextPath>
+                            </webApp>
+                            <httpConnector>
+                                <port>8999</port>
+                            </httpConnector>
+                            <stopPort>9898</stopPort>
+                            <stopKey>stop</stopKey>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
