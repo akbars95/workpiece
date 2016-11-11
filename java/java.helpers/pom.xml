@@ -4,10 +4,11 @@
 
     <groupId>com.mtsmda.workpiece.java</groupId>
     <artifactId>java.helpers</artifactId>
-    <version>1.5.3.RELEASE.08112016</version>
+    <version>1.6.RELEASE.11112016</version>
     <packaging>jar</packaging>
     <description>
         add unicode converter helper class
+        1.6.RELEASE.11112016 - add xsd validation for xml
     </description>
 
     <parent>
