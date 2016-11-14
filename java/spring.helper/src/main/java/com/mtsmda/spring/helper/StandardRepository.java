@@ -12,6 +12,7 @@ public interface StandardRepository<T> {
     CommonResponse<Boolean> insert(T tObject);
     CommonResponse<Boolean> update(T tObject);
     CommonResponse<Boolean> delete(T tObject);
+    CommonResponse<Boolean> deleteByUniqueFieldsOrPrimaryKey(T tObject);
     CommonResponse<T> getById(Integer id);
     CommonResponse<List<T>> getAll();
 
