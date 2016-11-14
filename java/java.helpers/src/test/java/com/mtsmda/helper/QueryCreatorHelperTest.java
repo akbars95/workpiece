@@ -95,6 +95,32 @@ public class QueryCreatorHelperTest {
     }
 
     @Test
+    public void deleteGenerateWithMoreThanOneWhereClauseTrueTest() {
+        String cityName = deleteGenerateWithMoreThanOneWhereClause(this.tableName, ListHelper.getListWithData("city_name", "city_id"), new Boolean(true));
+        assertNotNull(cityName);
+        assertEquals(cityName, "DELETE FROM cities WHERE city_name = :city_name AND city_id = :city_id;");
+
+        cityName = deleteGenerateWithMoreThanOneWhereClause(this.tableName, ListHelper.getListWithData("city_name", "city_id"), new Boolean(false));
+        assertNotNull(cityName);
+        assertEquals(cityName, "DELETE FROM cities WHERE city_name = :city_name OR city_id = :city_id;");
+
+        cityName = deleteGenerateWithMoreThanOneWhereClause(this.tableName, ListHelper.getListWithData("city_name", "city_id", "new_field"), new Boolean(false));
+        assertNotNull(cityName);
+        assertEquals(cityName, "DELETE FROM cities WHERE city_name = :city_name OR city_id = :city_id OR new_field = :new_field;");
+
+        cityName = deleteGenerateWithMoreThanOneWhereClause(this.tableName, ListHelper.getListWithData("city_name"), null);
+        assertNotNull(cityName);
+        assertEquals(cityName, "DELETE FROM cities WHERE city_name = :city_name;");
+
+        try {
+            cityName = deleteGenerateWithMoreThanOneWhereClause(this.tableName, ListHelper.getListWithData("city_name", "city_id"), null);
+        }
+        catch (RuntimeException e){
+            assertEquals(e.getMessage(), "Cannot be is where clause had more than 1 clause and 'AND' or 'OR' operation is null");
+        }
+    }
+
+    @Test
     public void deleteGenerateTrueTestDeleteAll() {
         String cityName = deleteGenerate(this.tableName, null);
         assertNotNull(cityName);

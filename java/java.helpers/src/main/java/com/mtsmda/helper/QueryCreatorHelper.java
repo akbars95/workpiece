@@ -90,13 +90,45 @@ public class QueryCreatorHelper {
     * if @param whereClause is null should be - delete from cities;
     * */
     public static String deleteGenerate(String tableName, String whereClause) {
-        if (StringUtils.isBlank(tableName)) {
+        /*if (StringUtils.isBlank(tableName)) {
             throw new RuntimeException("table name is null or empty!");
         }
         StringBuilder sbResult = new StringBuilder(DELETE_FROM);
         sbResult.append(SPACE).append(tableName);
         if (StringUtils.isNotBlank(whereClause)) {
             sbResult.append(SPACE).append(WHERE).append(sameEquals(whereClause));
+        }
+        sbResult.append(SEMICOLON);
+        return sbResult.toString();*/
+        return deleteGenerateWithMoreThanOneWhereClause(tableName, ObjectHelper.objectIsNull(whereClause) ? null : ListHelper.getListWithData(whereClause), null);
+    }
+
+    /*
+    * delete from cities where city_id = :city_id AND city_name = :city_name;
+    * if @param whereClause is null should be - delete from cities;
+    * */
+    public static String deleteGenerateWithMoreThanOneWhereClause(String tableName, List<String> whereClauses, Boolean isAndOperation) {
+        if (StringUtils.isBlank(tableName)) {
+            throw new RuntimeException("table name is null or empty!");
+        }
+        if (ObjectHelper.objectIsNotNull(whereClauses) && whereClauses.size() > 1 && ObjectHelper.objectIsNull(isAndOperation)) {
+            throw new RuntimeException("Cannot be is where clause had more than 1 clause and 'AND' or 'OR' operation is null");
+        }
+        StringBuilder sbResult = new StringBuilder(DELETE_FROM);
+        sbResult.append(SPACE).append(tableName);
+        if (ListHelper.listIsNotNullAndNotEmpty(whereClauses)) {
+            sbResult.append(SPACE).append(WHERE);
+            for (int i = 0; i < whereClauses.size(); i++) {
+                sbResult.append(sameEquals(whereClauses.get(i)));
+                if (i != whereClauses.size() - 1) {
+                    sbResult.append(SPACE).append(isAndOperation ? AND : OR);
+                }
+            }
+            whereClauses.forEach(current -> {
+
+
+            });
+
         }
         sbResult.append(SEMICOLON);
         return sbResult.toString();
@@ -163,7 +195,7 @@ public class QueryCreatorHelper {
                 }
                 sbResult.append(alias).append(DOT).append(selectParam).append(COMMA);
             });
-            if(sbResult.toString().endsWith(COMMA)){
+            if (sbResult.toString().endsWith(COMMA)) {
                 String temp = sbResult.substring(0, sbResult.length() - 1);
                 sbResult.delete(0, sbResult.length()).append(temp);
             }
@@ -185,11 +217,11 @@ public class QueryCreatorHelper {
             });
             String tempResult = sbResult.toString();
             if (isAnd) {
-                if(tempResult.endsWith(AND)){
+                if (tempResult.endsWith(AND)) {
                     return sbResult.substring(0, sbResult.length() - 3).trim();
                 }
             } else {
-                if(tempResult.endsWith(OR)){
+                if (tempResult.endsWith(OR)) {
                     return sbResult.substring(0, sbResult.length() - 2).trim();
                 }
             }
