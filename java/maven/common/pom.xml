@@ -6,11 +6,12 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>1.8.1.RELEASE.10112016</version>
+    <version>1.9.RELEASE.15112016</version>
     <packaging>pom</packaging>
     <description>
         1.8 - added: spring batch, guava, modified properties
         1.8.1 - added jetty plugin profile
+        1.9.RELEASE.15112016 - add jms lib
     </description>
 
     <properties>
@@ -31,6 +32,7 @@
         <org.quartz-scheduler.groupId>org.quartz-scheduler</org.quartz-scheduler.groupId>
         <javax.mail.groupId>javax.mail</javax.mail.groupId>
         <com.google.guava.groupId>com.google.guava</com.google.guava.groupId>
+        <javax.jms.groupId>javax.jms</javax.jms.groupId>
 
         <!--artifactId-->
         <spring.artifactId>spring</spring.artifactId>
@@ -83,6 +85,8 @@
         <com.google.guava.version>20.0</com.google.guava.version>
         <com.google.guava-collections.version>r03</com.google.guava-collections.version>
         <com.google.guava-base.version>r03</com.google.guava-base.version>
+        <javax.jms.version>1.1</javax.jms.version>
+        <javax.jms-api.version>2.0.1</javax.jms-api.version>
 
         <!--plugins-->
         <org.apache.maven.plugins.groupId>org.apache.maven.plugins</org.apache.maven.plugins.groupId>
@@ -103,6 +107,19 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--jms-->
+            <dependency>
+                <groupId>${javax.jms.groupId}</groupId>
+                <artifactId>jms</artifactId>
+                <version>${javax.jms.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${javax.jms.groupId}</groupId>
+                <artifactId>javax.jms-api</artifactId>
+                <version>${javax.jms-api.version}</version>
+            </dependency>
+
+
             <!--guava-->
             <dependency>
                 <groupId>${com.google.guava.groupId}</groupId>
