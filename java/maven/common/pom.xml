@@ -6,13 +6,14 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>2.0.RELEASE.15112016</version>
+    <version>3.0.RELEASE.16112016</version>
     <packaging>pom</packaging>
     <description>
         1.8 - added: spring batch, guava, modified properties
         1.8.1 - added jetty plugin profile
         1.9.RELEASE.15112016 - add jms lib
         2.0.RELEASE.15112016 - gitignore file sample
+        3.0.RELEASE.16112016 - add spring integration libs
     </description>
 
     <properties>
@@ -34,10 +35,12 @@
         <javax.mail.groupId>javax.mail</javax.mail.groupId>
         <com.google.guava.groupId>com.google.guava</com.google.guava.groupId>
         <javax.jms.groupId>javax.jms</javax.jms.groupId>
+        <org.springframework.integration.groupId>org.springframework.integration</org.springframework.integration.groupId>
 
         <!--artifactId-->
         <spring.artifactId>spring</spring.artifactId>
         <quartz.artifactId>quartz</quartz.artifactId>
+        <spring-integration.artifactId>spring-integration</spring-integration.artifactId>
 
         <!--version-->
         <tiles.version>3.0.7</tiles.version>
@@ -88,6 +91,7 @@
         <com.google.guava-base.version>r03</com.google.guava-base.version>
         <javax.jms.version>1.1</javax.jms.version>
         <javax.jms-api.version>2.0.1</javax.jms-api.version>
+        <spring-integration.version>4.3.4.RELEASE</spring-integration.version>
 
         <!--plugins-->
         <org.apache.maven.plugins.groupId>org.apache.maven.plugins</org.apache.maven.plugins.groupId>
@@ -108,6 +112,140 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-core</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-amqp</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-test</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-java-dsl</artifactId>
+                <version>1.2.0.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-jms</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-file</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-mail</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-jmx</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-stream</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-http</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-ip</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-adapter</artifactId>
+                <version>2.0.0.M3</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-ftp</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-event</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-xml</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-ws</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-groovy</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-jdbc</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-sftp</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-security</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-twitter</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-mongodb</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-xmpp</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-websocket</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-rmi</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.springframework.integration.groupId}</groupId>
+                <artifactId>${spring-integration.artifactId}-jpa</artifactId>
+                <version>${spring-integration.version}</version>
+            </dependency>
+
+
+
+
             <!--jms-->
             <dependency>
                 <groupId>${javax.jms.groupId}</groupId>
