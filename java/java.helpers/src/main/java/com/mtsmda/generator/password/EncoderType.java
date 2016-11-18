@@ -11,7 +11,8 @@ public enum EncoderType {
     PHONE_TYPE_CUSTOM("P097t", 35, 61),
     SHIFT_DEFAULT("S753d", 42, 26),
     SHIFT_RANDOM("S031r", 86, 43),
-    SHIFT_CUSTOM("S753c", 10, 34);
+    SHIFT_CUSTOM("S753c", 10, 34),
+    DOUBLE_REVERSE("D430r", 23, 72);
 
     private String code;
     private Integer beginCountLetters;

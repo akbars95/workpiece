@@ -4,19 +4,20 @@
 
     <groupId>com.mtsmda.workpiece.java</groupId>
     <artifactId>java.helpers</artifactId>
-    <version>1.6.2.RELEASE.14112016</version>
+    <version>1.7.RELEASE.18112016</version>
     <packaging>jar</packaging>
     <description>
         add unicode converter helper class
         1.6.RELEASE.11112016 - add xsd validation for xml
         1.6.1.RELEASE.14112016 - add interface cloneable and convertable
         1.6.2.RELEASE.14112016 - add new method for delete query creator
+        1.7.RELEASE.18112016 - add new password encoder
     </description>
 
     <parent>
         <groupId>com.mtsmda.workpiece.maven</groupId>
         <artifactId>common</artifactId>
-        <version>1.8.RELEASE.07112016</version>
+        <version>3.0.RELEASE.16112016</version>
     </parent>
 
     <name>java.helpers</name>

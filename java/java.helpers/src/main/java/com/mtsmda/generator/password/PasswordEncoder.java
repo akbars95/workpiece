@@ -98,6 +98,15 @@ public class PasswordEncoder {
                 encodedPassword.append(shiftNumber);
             }
             break;
+            case DOUBLE_REVERSE: {
+                encodedPassword.delete(0, encodedPassword.length());
+                int half = rawPassword.length() / 2;
+                encodedPassword.append(new StringBuilder(rawPassword.substring(rawPassword.length() - half)).toString()).
+                        append((rawPassword.length() % 2 != 0) ? rawPassword.substring(half, half + 1) : "").
+                        append(new StringBuilder(rawPassword.substring(0, half)).reverse());
+                System.out.println(rawPassword + " - " + encodedPassword);
+            }
+            break;
         }
 
         randomLetters(encoderType, encodedPassword, 1);
@@ -153,6 +162,17 @@ public class PasswordEncoder {
                 int generateRandomNumberInRange = Integer.parseInt(decodedPassword.substring(decodedPassword.length() - shiftNumber.toString().length()));
                 decodedPassword.delete(decodedPassword.length() - shiftNumber.toString().length(), decodedPassword.length());
                 shiftDecode(decodedPassword, shiftNumber);
+            }
+            break;
+            case DOUBLE_REVERSE: {
+                System.out.println(decodedPassword);
+                String temp = decodedPassword.toString();
+                decodedPassword.delete(0, decodedPassword.length());
+                int half = temp.length() / 2;
+                decodedPassword.append(new StringBuilder(temp.substring(temp.length() - half)).reverse().toString()).
+                        append((temp.length() % 2 != 0) ? temp.substring(half, half + 1) : "").
+                        append(new StringBuilder(temp.substring(0, half)));
+                System.out.println(temp + " - " + encodedPassword);
             }
             break;
         }

@@ -52,6 +52,11 @@ public class PasswordEncoderTest {
         encodePassword(EncoderType.SHIFT_CUSTOM, 153);
     }
 
+    @Test
+    public void testEncodePasswordDoubleReverse() {
+        encodePassword(EncoderType.DOUBLE_REVERSE, null);
+    }
+
     private void encodePassword(EncoderType reverse, Integer shiftNumber) {
         /*String ivanov = "I!#vanov";
         String encodedPassword = null;
@@ -73,6 +78,7 @@ public class PasswordEncoderTest {
         System.out.println(decodePassword);*/
         List<String> passwords = ListHelper.getListWithData("IvaNoVic190", "5345$%$iojikNasH", "this is passwordSesE");
         passwords.forEach(current -> {
+            System.out.println("-------------------" + reverse.toString() + "-------------------");
             String encodePassword = null;
             if(reverse == EncoderType.SHIFT_CUSTOM && ObjectHelper.objectIsNotNull(shiftNumber)){
                 encodePassword = PasswordEncoder.encodePassword(current, reverse, shiftNumber);
