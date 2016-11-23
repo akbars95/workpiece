@@ -6,7 +6,7 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>3.0.RELEASE.16112016</version>
+    <version>3.0.1.RELEASE.23112016</version>
     <packaging>pom</packaging>
     <description>
         1.8 - added: spring batch, guava, modified properties
@@ -35,12 +35,15 @@
         <javax.mail.groupId>javax.mail</javax.mail.groupId>
         <com.google.guava.groupId>com.google.guava</com.google.guava.groupId>
         <javax.jms.groupId>javax.jms</javax.jms.groupId>
-        <org.springframework.integration.groupId>org.springframework.integration</org.springframework.integration.groupId>
+        <org.springframework.integration.groupId>org.springframework.integration
+        </org.springframework.integration.groupId>
+        <org.apache.activemq.groupId>org.apache.activemq</org.apache.activemq.groupId>
 
         <!--artifactId-->
         <spring.artifactId>spring</spring.artifactId>
         <quartz.artifactId>quartz</quartz.artifactId>
         <spring-integration.artifactId>spring-integration</spring-integration.artifactId>
+        <activemq.artifactId>activemq</activemq.artifactId>
 
         <!--version-->
         <tiles.version>3.0.7</tiles.version>
@@ -242,8 +245,6 @@
                 <artifactId>${spring-integration.artifactId}-jpa</artifactId>
                 <version>${spring-integration.version}</version>
             </dependency>
-
-
 
 
             <!--jms-->
@@ -654,10 +655,22 @@
                 <version>${commons-csv.version}</version>
             </dependency>
 
-            <!--jms-->
+            <!--jms
+            apache activemq
+            -->
             <dependency>
-                <groupId>org.apache.activemq</groupId>
-                <artifactId>activemq-all</artifactId>
+                <groupId>${org.apache.activemq.groupId}</groupId>
+                <artifactId>${activemq.artifactId}-all</artifactId>
+                <version>${activemq-all.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.activemq.groupId}</groupId>
+                <artifactId>${activemq.artifactId}-spring</artifactId>
+                <version>${activemq-all.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.activemq.groupId}</groupId>
+                <artifactId>${activemq.artifactId}-leveldb-store</artifactId>
                 <version>${activemq-all.version}</version>
             </dependency>
 
