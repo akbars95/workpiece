@@ -1,0 +1,156 @@
+https://blogs.oracle.com/dev2dev/entry/how_to_get_oracle_jdbc
+
+
+(1) Setting up Maven:
+
+Step#1: Download Maven
+
+If you do not have Maven installed already, download and install it from the website: http://maven.apache.org
+
+Step#2: Update M2_HOME and JAVA_HOME environment variables
+
+Make sure to update M2_HOME to point to the path where Maven is installed and JAVA_HOME to point to the location where the JDK is installed. If you require a specific Java version then set it using these system arguments. -Dmaven.compiler.source=1.8 -Dmaven.compiler.target=1.8
+
+(2) Customizing Maven Settings
+
+Step#1: Create a settings.xml file
+
+The settings.xml file is required for downloading Oracle JDBC drivers and UCP. You must create a new one if it does not exist already. The Maven settings.xml file is kept in the local maven repository ( {USER_HOME}/.m2/ ) that is usually under the user home directory.
+For example: If the username is test then the path will be
+Unix : /home/test/.m2/settings.xml
+Windows : C:\Users\test\.m2\settings.xml
+Step#2: Registering with the Oracle Maven site
+
+The Oracle Maven repository requires a valid user registration and the user should also accept the terms and conditions (T&Cs) by logging into http://maven.oracle.com . This username will be used in settings.xml .
+Step#3: Create a settings-security.xml
+
+Create a settings-security.xml file that holds the master password information under the local maven repository. Refer to Step#1 for local maven repository (../.m2/.) path
+Use the following commands to generate a master password in Maven and add the output of this command to settings-security.xml as shown in the sample
+"mvn -encrypt-master-password <any_master_password>" or "mvn -emp <any_master_password>"
+Sample settings-security.xml :
+
+<settingsSecurity>
+<master>{By8wW7YcTxAHof0MF4Z3wPKboywhGJvxHD9m0NvHA2U=}</master>
+</settingsSecurity>
+Step#4: Encrypt the user password before using it in settings.xml
+
+Encrypt the user password (the one used to accept T&Cs on http://maven.oracle.com) before using it in settings.xml.
+Use the following commands to encrypt the user password and update settings.xml as shown in the sample
+"mvn -encrypt-password <user_password>" or "mvn -ep <user_password>"
+Sample settings.xml
+
+<settings>                                                                                                                    <proxies>
+  <proxy>
+    <active>true</active>
+    <protocol>http</protocol>
+    <host>proxy.mycompany.com</host>
+    <nonProxyHosts>mycompany.com</nonProxyHosts>
+  </proxy>
+</proxies>
+  <servers>
+    <server>
+      <id>maven.oracle.com </id>
+      <username>firstname.lastname@test.com</username>
+      <password>{pnwmhVnzdM8H3UAneUKLmaHGZCoaprbMQ/Ac5UktvsM=}</password>
+       <configuration>
+         <basicAuthScope>
+           <host>ANY </host>
+           <port>ANY </port>
+           <realm>OAM 11g </realm>
+         </basicAuthScope>
+	 <httpConfiguration>
+	   <all>
+             <params>
+               <property>
+		 <name>http.protocol.allow-circular-redirects </name>
+		 <value>%b,true </value>
+	       </property>
+	     </params>
+	   </all>
+	 </httpConfiguration>
+       </configuration>
+    </server>
+  </servers>
+</settings>
+
+(3) Create a project to test Maven download
+
+Step#1: Create a pom.xml and specify GAV for JDBC drivers and UCP
+
+Add the following GAV details for downloading JDBC driver or UCP from the required version.
+
+ <dependencies>
+    <dependency>
+      <groupId>com.oracle.jdbc</groupId>
+      <artifactId>ojdbc7</artifactId>
+      <version>12.1.0.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.oracle.jdbc</groupId>
+      <artifactId>ucp</artifactId>
+      <version>12.1.0.2</version>
+    </dependency>
+  </dependencies>
+
+    <repositories>
+    <repository>
+      <id>maven.oracle.com</id>
+      <name>oracle-maven-repo</name>
+      <url>https://maven.oracle.com</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </releases>
+  </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>maven.oracle.com</id>
+      <name>oracle-maven-repo</name>
+      <url>https://maven.oracle.com</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </releases>
+    </pluginRepository>
+  </pluginRepositories>
+
+Step#2: Create 'src' and 'target' directories
+
+All Java source files must be placed under src directory. Example: /src/main/java/<foldername>/<filename> In addition, create a target directory where the compiled classes will be placed.
+(4) Testing the download of JDBC and UCP
+
+Step#1: Compile the Maven Project
+
+Use the following commands to compile or install or package to test the download.
+"mvn –s settings.xml package" or "mvn -s settings.xml compile" or "mvn -s settings.xml install"
+The output of a successful download will look as shown below:
+
+[INFO] Building jar: /home/test/maven/public-repo-test/target/jdbc-driver-test.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.437 s
+[INFO] Finished at: 2015-10-01T12:58:25-07:00
+[INFO] Final Memory: 9M/282M
+[INFO] ------------------------------------------------------------------------
+Step#2: Check the downloaded JDBC drivers and UCP
+
+If the build was successful, then the JARs and POMs will be downloaded onto the local maven repository at ~/.m2/repository/com/oracle/jdbc/ojdbc7/12.1.0.2/ . Note that OJDBC7.jar will download all the dependent jar files such as osdt_core.jar, xdb6.jar, xmlparserv2.jar etc., . Each download has its own JAR and POM files.
+Sample output:
+
+[test@mymachine jdbc]$ pwd
+/home/test/.m2/repository/com/oracle/jdbc
+[test@mymachine jdbc]$ ls -lt
+total 11
+drwxr-xr-x+ 3 test dba 3 Oct 1 11:13 osdt_core
+drwxr-xr-x+ 3 test dba 3 Oct 1 11:13 osdt_cert
+drwxr-xr-x+ 3 test dba 3 Oct 1 11:13 oraclepki
+drwxr-xr-x+ 3 test dba 3 Oct 1 11:13 xmlparserv2
+drwxr-xr-x+ 3 test dba 3 Oct 1 11:13 orai18n
+drwxr-xr-x+ 3 test dba 3 Oct 1 11:13 xdb6
+drwxr-xr-x+ 3 test dba 3 Oct 1 11:13 ojdbc7

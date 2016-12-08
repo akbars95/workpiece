@@ -6,7 +6,7 @@
 
     <groupId>com.mtsmda.workpiece.maven</groupId>
     <artifactId>common</artifactId>
-    <version>3.0.1.RELEASE.23112016</version>
+    <version>4.2.RELEASE.08122016</version>
     <packaging>pom</packaging>
     <description>
         1.8 - added: spring batch, guava, modified properties
@@ -14,9 +14,14 @@
         1.9.RELEASE.15112016 - add jms lib
         2.0.RELEASE.15112016 - gitignore file sample
         3.0.RELEASE.16112016 - add spring integration libs
+        4.0.RELEASE.01122016 - add apache camel
+        4.1.RELEASE.02122016 - add hibernate lib
+        4.2.RELEASE.08122016 - add oracle maven repository
     </description>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <project.java.version>1.8</project.java.version>
 
         <!--groupId-->
@@ -38,12 +43,15 @@
         <org.springframework.integration.groupId>org.springframework.integration
         </org.springframework.integration.groupId>
         <org.apache.activemq.groupId>org.apache.activemq</org.apache.activemq.groupId>
+        <org.apache.camel.groupId>org.apache.camel</org.apache.camel.groupId>
+        <com.oracle.jdbc.groupId>com.oracle.jdbc</com.oracle.jdbc.groupId>
 
         <!--artifactId-->
         <spring.artifactId>spring</spring.artifactId>
         <quartz.artifactId>quartz</quartz.artifactId>
         <spring-integration.artifactId>spring-integration</spring-integration.artifactId>
         <activemq.artifactId>activemq</activemq.artifactId>
+        <camel.artifactId>camel</camel.artifactId>
 
         <!--version-->
         <tiles.version>3.0.7</tiles.version>
@@ -95,6 +103,9 @@
         <javax.jms.version>1.1</javax.jms.version>
         <javax.jms-api.version>2.0.1</javax.jms-api.version>
         <spring-integration.version>4.3.4.RELEASE</spring-integration.version>
+        <org.apache.camel.version>2.18.0</org.apache.camel.version>
+        <hibernate.version>5.2.5.Final</hibernate.version>
+        <com.oracle.jdbc.version>12.1.0.2</com.oracle.jdbc.version>
 
         <!--plugins-->
         <org.apache.maven.plugins.groupId>org.apache.maven.plugins</org.apache.maven.plugins.groupId>
@@ -115,6 +126,66 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>${org.hibernate.groupId}</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.hibernate.groupId}</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.hibernate.groupId}</groupId>
+                <artifactId>hibernate-java8</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+            <!--apache.camel-->
+            <dependency>
+                <groupId>${org.apache.camel.groupId}</groupId>
+                <artifactId>${camel.artifactId}-jms</artifactId>
+                <version>${org.apache.camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.camel.groupId}</groupId>
+                <artifactId>${camel.artifactId}-stream</artifactId>
+                <version>${org.apache.camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.camel.groupId}</groupId>
+                <artifactId>${camel.artifactId}-spring</artifactId>
+                <version>${org.apache.camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.camel.groupId}</groupId>
+                <artifactId>${camel.artifactId}-cxf</artifactId>
+                <version>${org.apache.camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.camel.groupId}</groupId>
+                <artifactId>${camel.artifactId}-jms</artifactId>
+                <version>${org.apache.camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.camel.groupId}</groupId>
+                <artifactId>${camel.artifactId}-jaxb</artifactId>
+                <version>${org.apache.camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.camel.groupId}</groupId>
+                <artifactId>${camel.artifactId}-test</artifactId>
+                <version>${org.apache.camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.camel.groupId}</groupId>
+                <artifactId>${camel.artifactId}-core</artifactId>
+                <version>${org.apache.camel.version}</version>
+            </dependency>
+
+
+            <!--spring-integration-->
             <dependency>
                 <groupId>${org.springframework.integration.groupId}</groupId>
                 <artifactId>${spring-integration.artifactId}-core</artifactId>
@@ -246,7 +317,6 @@
                 <version>${spring-integration.version}</version>
             </dependency>
 
-
             <!--jms-->
             <dependency>
                 <groupId>${javax.jms.groupId}</groupId>
@@ -258,7 +328,6 @@
                 <artifactId>javax.jms-api</artifactId>
                 <version>${javax.jms-api.version}</version>
             </dependency>
-
 
             <!--guava-->
             <dependency>
@@ -492,6 +561,17 @@
                 <artifactId>${spring.artifactId}-batch-core</artifactId>
                 <version>${spring.batch.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${org.springframework.groupId}</groupId>
+                <artifactId>${spring.artifactId}-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>1.10.5.RELEASE</version>
+            </dependency>
+
 
             <!-- json -->
             <dependency>
@@ -598,6 +678,17 @@
                 <artifactId>ojdbc</artifactId>
                 <version>${oracle.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${com.oracle.jdbc.groupId}</groupId>
+                <artifactId>ojdbc7</artifactId>
+                <version>${com.oracle.jdbc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${com.oracle.jdbc.groupId}</groupId>
+                <artifactId>ucp</artifactId>
+                <version>${com.oracle.jdbc.version}</version>
+            </dependency>
 
             <!--mongodb-->
             <dependency>
@@ -655,9 +746,7 @@
                 <version>${commons-csv.version}</version>
             </dependency>
 
-            <!--jms
-            apache activemq
-            -->
+            <!--apache activemq-->
             <dependency>
                 <groupId>${org.apache.activemq.groupId}</groupId>
                 <artifactId>${activemq.artifactId}-all</artifactId>
@@ -671,6 +760,11 @@
             <dependency>
                 <groupId>${org.apache.activemq.groupId}</groupId>
                 <artifactId>${activemq.artifactId}-leveldb-store</artifactId>
+                <version>${activemq-all.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${org.apache.activemq.groupId}</groupId>
+                <artifactId>${activemq.artifactId}-camel</artifactId>
                 <version>${activemq-all.version}</version>
             </dependency>
 
@@ -804,5 +898,31 @@
             </build>
         </profile>
     </profiles>
+
+    <repositories>
+        <repository>
+            <id>maven.oracle.com</id>
+            <name>oracle-maven-repo</name>
+            <url>https://maven.oracle.com</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven.oracle.com</id>
+            <name>oracle-maven-repo</name>
+            <url>https://maven.oracle.com</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>

@@ -1,0 +1,23 @@
+<!--oracle maven repository-->
+<server>
+<id>maven.oracle.com</id>
+<username>dmitri.minzat@endava.com</username>
+<password>{BxyBGmE4bZEHF1RLpZWnKWx9RkhkrST/h1WnyJL2JeA=}</password>
+<configuration>
+    <basicAuthScope>
+        <host>ANY</host>
+        <port>ANY</port>
+        <realm>OAM 11g</realm>
+    </basicAuthScope>
+    <httpConfiguration>
+        <all>
+            <params>
+                <property>
+                    <name>http.protocol.allow-circular-redirects</name>
+                    <value>%b,true</value>
+                </property>
+            </params>
+        </all>
+    </httpConfiguration>
+</configuration>
+</server>
